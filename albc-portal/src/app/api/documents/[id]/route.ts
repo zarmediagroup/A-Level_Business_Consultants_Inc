@@ -1,0 +1,107 @@
+import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@/lib/supabase-server";
+import { DOCUMENT_STATUS } from "@/lib/utils";
+
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const { id } = await params;
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  const { data: adminProfile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .single();
+
+  if (adminProfile?.role !== "admin") {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
+
+  const body = await request.json();
+  const { status } = body;
+
+  const validStatuses = DOCUMENT_STATUS.map((s) => s.value);
+  if (!validStatuses.includes(status)) {
+    return NextResponse.json({ error: "Invalid status" }, { status: 400 });
+  }
+
+  const { data: doc, error } = await supabase
+    .from("documents")
+    .update({ status })
+    .eq("id", id)
+    .select()
+    .single();
+
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+
+  // Audit log
+  await supabase.from("audit_logs").insert({
+    user_id: user.id,
+    action: "document_status_change",
+    entity_type: "document",
+    entity_id: id,
+    details: { new_status: status },
+  });
+
+  // Notify client
+  const statusLabel = DOCUMENT_STATUS.find((s) => s.value === status)?.label ?? status;
+  await supabase.from("notifications").insert({
+    recipient_id: doc.client_id,
+    type: "document_status_changed",
+    title: "Document Status Updated",
+    message: `Your document "${doc.file_name}" status has been updated to: ${statusLabel}`,
+    related_document_id: id,
+  });
+
+  return NextResponse.json({ document: doc });
+}
+
+export async function DELETE(
+  _request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const { id } = await params;
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  const { data: adminProfile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .single();
+
+  if (adminProfile?.role !== "admin") {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
+
+  // Get document to find storage path
+  const { data: doc } = await supabase
+    .from("documents")
+    .select("storage_path, file_name, client_id")
+    .eq("id", id)
+    .single();
+
+  if (!doc) return NextResponse.json({ error: "Document not found" }, { status: 404 });
+
+  // Delete from storage
+  await supabase.storage.from("documents").remove([doc.storage_path]);
+
+  // Delete record
+  const { error } = await supabase.from("documents").delete().eq("id", id);
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+
+  await supabase.from("audit_logs").insert({
+    user_id: user.id,
+    action: "document_delete",
+    entity_type: "document",
+    entity_id: id,
+    details: { file_name: doc.file_name, client_id: doc.client_id },
+  });
+
+  return NextResponse.json({ success: true });
+}
