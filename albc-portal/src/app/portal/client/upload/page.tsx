@@ -10,7 +10,7 @@ import {
   AlertCircle,
   FileText,
 } from "lucide-react";
-import { DOCUMENT_CATEGORIES, formatFileSize } from "@/lib/utils";
+import { DOCUMENT_CATEGORIES, DOCUMENT_FOLDERS, formatFileSize } from "@/lib/utils";
 import Link from "next/link";
 
 const ACCEPTED_TYPES = {
@@ -30,6 +30,7 @@ interface UploadFile {
   file: File;
   id: string;
   category: string;
+  folder: string;
   status: "pending" | "uploading" | "success" | "error";
   error?: string;
 }
@@ -44,6 +45,7 @@ export default function UploadPage() {
       file: f,
       id: Math.random().toString(36).slice(2),
       category: "other",
+      folder: "General",
       status: "pending",
     }));
     setFiles((prev) => [...prev, ...newFiles]);
@@ -70,6 +72,12 @@ export default function UploadPage() {
     );
   };
 
+  const updateFolder = (id: string, folder: string) => {
+    setFiles((prev) =>
+      prev.map((f) => (f.id === id ? { ...f, folder } : f))
+    );
+  };
+
   const handleUpload = async () => {
     const pending = files.filter((f) => f.status === "pending");
     if (pending.length === 0) return;
@@ -85,6 +93,7 @@ export default function UploadPage() {
         const formData = new FormData();
         formData.append("file", uf.file);
         formData.append("category", uf.category);
+        formData.append("folder", uf.folder);
 
         const res = await fetch("/api/documents/upload", {
           method: "POST",
@@ -161,7 +170,7 @@ export default function UploadPage() {
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-[#0b1d3a]">Upload Documents</h1>
         <p className="text-slate-500 text-sm mt-1">
-          Securely upload your financial documents. Accepted: PDF, Word, Excel, JPEG, PNG (max 25MB each)
+          Securely upload your financial documents into template folders. Accepted: PDF, Word, Excel, JPEG, PNG (max 25MB each)
         </p>
       </div>
 
@@ -239,15 +248,26 @@ export default function UploadPage() {
 
               {/* Category select */}
               {uf.status === "pending" && (
-                <select
-                  value={uf.category}
-                  onChange={(e) => updateCategory(uf.id, e.target.value)}
-                  className="border border-slate-200 rounded-xl px-3 py-2 text-sm text-slate-700 focus:outline-none focus:border-[#c9a84c]/50 bg-white flex-shrink-0"
-                >
-                  {DOCUMENT_CATEGORIES.map((c) => (
-                    <option key={c.value} value={c.value}>{c.label}</option>
-                  ))}
-                </select>
+                <div className="flex gap-2 flex-shrink-0">
+                  <select
+                    value={uf.folder}
+                    onChange={(e) => updateFolder(uf.id, e.target.value)}
+                    className="border border-slate-200 rounded-xl px-3 py-2 text-sm text-slate-700 focus:outline-none focus:border-[#c9a84c]/50 bg-white"
+                  >
+                    {DOCUMENT_FOLDERS.map((folder) => (
+                      <option key={folder} value={folder}>{folder}</option>
+                    ))}
+                  </select>
+                  <select
+                    value={uf.category}
+                    onChange={(e) => updateCategory(uf.id, e.target.value)}
+                    className="border border-slate-200 rounded-xl px-3 py-2 text-sm text-slate-700 focus:outline-none focus:border-[#c9a84c]/50 bg-white"
+                  >
+                    {DOCUMENT_CATEGORIES.map((c) => (
+                      <option key={c.value} value={c.value}>{c.label}</option>
+                    ))}
+                  </select>
+                </div>
               )}
 
               {/* Remove */}

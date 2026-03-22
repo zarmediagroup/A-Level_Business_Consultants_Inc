@@ -58,6 +58,16 @@ export const DOCUMENT_STATUS = [
   { value: "requires_action", label: "Requires Action", color: "badge-requires-action" },
 ] as const;
 
+export const DOCUMENT_FOLDERS = [
+  "General",
+  "Monthly Bank Statements",
+  "Invoices",
+  "Tax Documents",
+  "Identity Documents",
+  "Payroll Documents",
+  "Contracts",
+] as const;
+
 export const SERVICE_CATEGORIES = [
   "Bookkeeping",
   "Tax Returns",

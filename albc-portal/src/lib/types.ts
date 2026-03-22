@@ -21,6 +21,7 @@ export interface Document {
   file_type: string;
   file_size: number;
   storage_path: string;
+  folder?: string;
   category: string;
   status: string;
   uploaded_at: string;

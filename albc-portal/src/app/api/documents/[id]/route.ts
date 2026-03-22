@@ -22,16 +22,24 @@ export async function PATCH(
   }
 
   const body = await request.json();
-  const { status } = body;
+  const { status, notes } = body;
 
   const validStatuses = DOCUMENT_STATUS.map((s) => s.value);
-  if (!validStatuses.includes(status)) {
+  if (status && !validStatuses.includes(status)) {
     return NextResponse.json({ error: "Invalid status" }, { status: 400 });
+  }
+
+  const updates: { status?: string; notes?: string | null } = {};
+  if (status) updates.status = status;
+  if (typeof notes === "string") updates.notes = notes.trim() || null;
+
+  if (Object.keys(updates).length === 0) {
+    return NextResponse.json({ error: "No changes provided" }, { status: 400 });
   }
 
   const { data: doc, error } = await supabase
     .from("documents")
-    .update({ status })
+    .update(updates)
     .eq("id", id)
     .select()
     .single();
@@ -41,21 +49,33 @@ export async function PATCH(
   // Audit log
   await supabase.from("audit_logs").insert({
     user_id: user.id,
-    action: "document_status_change",
+    action: status ? "document_status_change" : "document_comment_added",
     entity_type: "document",
     entity_id: id,
-    details: { new_status: status },
+    details: { new_status: status, notes: updates.notes ?? null },
   });
 
   // Notify client
-  const statusLabel = DOCUMENT_STATUS.find((s) => s.value === status)?.label ?? status;
-  await supabase.from("notifications").insert({
-    recipient_id: doc.client_id,
-    type: "document_status_changed",
-    title: "Document Status Updated",
-    message: `Your document "${doc.file_name}" status has been updated to: ${statusLabel}`,
-    related_document_id: id,
-  });
+  if (status) {
+    const statusLabel = DOCUMENT_STATUS.find((s) => s.value === status)?.label ?? status;
+    await supabase.from("notifications").insert({
+      recipient_id: doc.client_id,
+      type: "document_status_changed",
+      title: "Document Status Updated",
+      message: `Your document "${doc.file_name}" status has been updated to: ${statusLabel}`,
+      related_document_id: id,
+    });
+  }
+
+  if (typeof notes === "string" && updates.notes) {
+    await supabase.from("notifications").insert({
+      recipient_id: doc.client_id,
+      type: "document_query_added",
+      title: "New Query On Your Document",
+      message: `A comment was added on "${doc.file_name}": ${updates.notes}`,
+      related_document_id: id,
+    });
+  }
 
   return NextResponse.json({ document: doc });
 }

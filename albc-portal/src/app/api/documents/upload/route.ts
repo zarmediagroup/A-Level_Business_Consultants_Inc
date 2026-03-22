@@ -21,6 +21,7 @@ export async function POST(request: NextRequest) {
   const formData = await request.formData();
   const file = formData.get("file") as File | null;
   const category = (formData.get("category") as string) || "other";
+  const folder = (formData.get("folder") as string) || "General";
 
   if (!file) return NextResponse.json({ error: "No file provided" }, { status: 400 });
   if (file.size > MAX_SIZE) {
@@ -36,7 +37,8 @@ export async function POST(request: NextRequest) {
   // Generate unique storage path
   const timestamp = Date.now();
   const sanitized = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
-  const storagePath = `${user.id}/${timestamp}_${sanitized}`;
+  const sanitizedFolder = folder.replace(/[^a-zA-Z0-9_-]/g, "_");
+  const storagePath = `${user.id}/${sanitizedFolder}/${timestamp}_${sanitized}`;
 
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
@@ -63,6 +65,7 @@ export async function POST(request: NextRequest) {
       file_type: file.type,
       file_size: file.size,
       storage_path: storagePath,
+      folder,
       category,
       status: "received",
       uploaded_by: user.id,
@@ -81,7 +84,7 @@ export async function POST(request: NextRequest) {
     action: "document_upload",
     entity_type: "document",
     entity_id: doc.id,
-    details: { file_name: file.name, category, file_size: file.size },
+    details: { file_name: file.name, folder, category, file_size: file.size },
   });
 
   // Notify admin(s)
@@ -104,7 +107,7 @@ export async function POST(request: NextRequest) {
         recipient_id: admin.id,
         type: "document_uploaded",
         title: "New Document Uploaded",
-        message: `${clientName} uploaded "${file.name}" (${category.replace(/_/g, " ")})`,
+        message: `${clientName} uploaded "${file.name}" to ${folder} (${category.replace(/_/g, " ")})`,
         related_document_id: doc.id,
         related_client_id: user.id,
       }))
@@ -119,6 +122,7 @@ export async function POST(request: NextRequest) {
           type: "document_uploaded",
           clientName,
           fileName: file.name,
+          folder,
           category,
           docId: doc.id,
         }),
@@ -133,7 +137,7 @@ export async function POST(request: NextRequest) {
     recipient_id: user.id,
     type: "upload_confirmed",
     title: "Document Uploaded Successfully",
-    message: `Your document "${file.name}" has been received and is under review.`,
+    message: `Your document "${file.name}" was uploaded to ${folder} and is under review.`,
     related_document_id: doc.id,
   });
 

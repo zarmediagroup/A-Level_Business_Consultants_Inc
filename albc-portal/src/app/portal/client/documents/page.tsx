@@ -4,9 +4,9 @@ import { redirect } from "next/navigation";
 import ClientDocumentsPanel from "./ClientDocumentsPanel";
 
 const DEMO_DOCS = [
-  { id: "1", client_id: "demo", file_name: "Bank_Statement_March_2026.pdf", file_type: "application/pdf", file_size: 245000, storage_path: "", category: "bank_statement", status: "under_review", uploaded_at: new Date().toISOString(), uploaded_by: "demo" },
-  { id: "2", client_id: "demo", file_name: "Invoice_INV-2026-003.pdf", file_type: "application/pdf", file_size: 112000, storage_path: "", category: "invoice", status: "received", uploaded_at: new Date(Date.now() - 86400000).toISOString(), uploaded_by: "demo" },
-  { id: "3", client_id: "demo", file_name: "Tax_Certificate_2025.pdf", file_type: "application/pdf", file_size: 89000, storage_path: "", category: "tax_certificate", status: "processed", uploaded_at: new Date(Date.now() - 172800000).toISOString(), uploaded_by: "demo" },
+  { id: "1", client_id: "demo", file_name: "Bank_Statement_March_2026.pdf", file_type: "application/pdf", file_size: 245000, storage_path: "", folder: "Monthly Bank Statements", category: "bank_statement", status: "under_review", notes: "This looks like February's statement. Please upload the March statement instead.", uploaded_at: new Date().toISOString(), uploaded_by: "demo" },
+  { id: "2", client_id: "demo", file_name: "Invoice_INV-2026-003.pdf", file_type: "application/pdf", file_size: 112000, storage_path: "", folder: "Invoices", category: "invoice", status: "received", uploaded_at: new Date(Date.now() - 86400000).toISOString(), uploaded_by: "demo" },
+  { id: "3", client_id: "demo", file_name: "Tax_Certificate_2025.pdf", file_type: "application/pdf", file_size: 89000, storage_path: "", folder: "Tax Documents", category: "tax_certificate", status: "processed", uploaded_at: new Date(Date.now() - 172800000).toISOString(), uploaded_by: "demo" },
 ];
 
 export default async function ClientDocumentsPage() {

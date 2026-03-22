@@ -47,6 +47,7 @@ create table if not exists public.documents (
   file_type       text not null,
   file_size       bigint not null,
   storage_path    text not null,
+  folder          text not null default 'General',
   category        text not null default 'other'
                     check (category in ('bank_statement','invoice','tax_certificate',
                                         'id_document','financial_statement','payslip',
@@ -57,6 +58,8 @@ create table if not exists public.documents (
   uploaded_at     timestamptz not null default now(),
   uploaded_by     uuid not null references public.profiles(id)
 );
+
+alter table public.documents add column if not exists folder text not null default 'General';
 
 alter table public.documents enable row level security;
 

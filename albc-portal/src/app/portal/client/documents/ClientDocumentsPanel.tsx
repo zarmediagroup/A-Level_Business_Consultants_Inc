@@ -2,12 +2,13 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
-import { FileText, Search, Upload, Download, Filter } from "lucide-react";
+import { FileText, Search, Upload, Download, Filter, MessageSquare } from "lucide-react";
 import {
   formatDate,
   formatFileSize,
   DOCUMENT_CATEGORIES,
   DOCUMENT_STATUS,
+  DOCUMENT_FOLDERS,
 } from "@/lib/utils";
 import type { Document } from "@/lib/types";
 
@@ -17,6 +18,7 @@ interface ClientDocumentsPanelProps {
 
 export default function ClientDocumentsPanel({ initialDocuments }: ClientDocumentsPanelProps) {
   const [search, setSearch] = useState("");
+  const [folderFilter, setFolderFilter] = useState("all");
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState("all");
 
@@ -24,14 +26,16 @@ export default function ClientDocumentsPanel({ initialDocuments }: ClientDocumen
     return initialDocuments.filter((d) => {
       const q = search.toLowerCase();
       const matchSearch = !search || d.file_name.toLowerCase().includes(q);
+      const matchFolder = folderFilter === "all" || (d.folder ?? "General") === folderFilter;
       const matchCategory = categoryFilter === "all" || d.category === categoryFilter;
       const matchStatus = statusFilter === "all" || d.status === statusFilter;
-      return matchSearch && matchCategory && matchStatus;
+      return matchSearch && matchFolder && matchCategory && matchStatus;
     });
-  }, [initialDocuments, search, categoryFilter, statusFilter]);
+  }, [initialDocuments, search, folderFilter, categoryFilter, statusFilter]);
 
   const getCategoryLabel = (value: string) =>
     DOCUMENT_CATEGORIES.find((c) => c.value === value)?.label ?? value;
+  const getFolderLabel = (value?: string) => value ?? "General";
 
   const getStatusInfo = (value: string) =>
     DOCUMENT_STATUS.find((s) => s.value === value) ?? { label: value, color: "" };
@@ -88,6 +92,16 @@ export default function ClientDocumentsPanel({ initialDocuments }: ClientDocumen
         <div className="flex items-center gap-3">
           <Filter className="w-4 h-4 text-slate-400" />
           <select
+            value={folderFilter}
+            onChange={(e) => setFolderFilter(e.target.value)}
+            className="border border-slate-200 rounded-xl px-3 py-2.5 text-sm text-slate-700 focus:outline-none bg-white"
+          >
+            <option value="all">All Folders</option>
+            {DOCUMENT_FOLDERS.map((folder) => (
+              <option key={folder} value={folder}>{folder}</option>
+            ))}
+          </select>
+          <select
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
             className="border border-slate-200 rounded-xl px-3 py-2.5 text-sm text-slate-700 focus:outline-none bg-white"
@@ -106,7 +120,7 @@ export default function ClientDocumentsPanel({ initialDocuments }: ClientDocumen
           <table className="w-full">
             <thead>
               <tr className="border-b border-slate-100">
-                {["Document", "Category", "Size", "Uploaded", "Status", ""].map((h) => (
+                {["Document", "Folder", "Category", "Size", "Uploaded", "Status", ""].map((h) => (
                   <th key={h || "action"} className="text-left px-5 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">
                     {h}
                   </th>
@@ -116,7 +130,7 @@ export default function ClientDocumentsPanel({ initialDocuments }: ClientDocumen
             <tbody className="divide-y divide-slate-50">
               {filtered.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-6 py-16 text-center">
+                  <td colSpan={7} className="px-6 py-16 text-center">
                     <FileText className="w-10 h-10 text-slate-200 mx-auto mb-3" />
                     <p className="text-slate-400 text-sm mb-4">
                       {search || categoryFilter !== "all" || statusFilter !== "all"
@@ -148,6 +162,15 @@ export default function ClientDocumentsPanel({ initialDocuments }: ClientDocumen
                             {doc.file_name}
                           </span>
                         </div>
+                        {doc.notes && (
+                          <div className="mt-1 flex items-start gap-1.5 text-amber-700 text-xs">
+                            <MessageSquare className="w-3 h-3 mt-0.5 flex-shrink-0" />
+                            <span>{doc.notes}</span>
+                          </div>
+                        )}
+                      </td>
+                      <td className="px-5 py-4">
+                        <span className="text-slate-500 text-sm">{getFolderLabel(doc.folder)}</span>
                       </td>
                       <td className="px-5 py-4">
                         <span className="text-slate-500 text-sm">{getCategoryLabel(doc.category)}</span>

@@ -8,13 +8,14 @@ import {
   Download,
   Trash2,
   RefreshCw,
-  Eye,
+  MessageSquare,
 } from "lucide-react";
 import {
   formatDate,
   formatFileSize,
   DOCUMENT_CATEGORIES,
   DOCUMENT_STATUS,
+  DOCUMENT_FOLDERS,
 } from "@/lib/utils";
 import type { Document } from "@/lib/types";
 
@@ -29,6 +30,7 @@ export default function DocumentsPanel({ initialDocuments, clients }: DocumentsP
   const [documents, setDocuments] = useState(initialDocuments);
   const [search, setSearch] = useState("");
   const [clientFilter, setClientFilter] = useState("all");
+  const [folderFilter, setFolderFilter] = useState("all");
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState("all");
   const [updatingStatus, setUpdatingStatus] = useState<string | null>(null);
@@ -41,14 +43,16 @@ export default function DocumentsPanel({ initialDocuments, clients }: DocumentsP
         d.file_name.toLowerCase().includes(q) ||
         (d.client?.full_name ?? "").toLowerCase().includes(q);
       const matchClient = clientFilter === "all" || d.client_id === clientFilter;
+      const matchFolder = folderFilter === "all" || (d.folder ?? "General") === folderFilter;
       const matchCategory = categoryFilter === "all" || d.category === categoryFilter;
       const matchStatus = statusFilter === "all" || d.status === statusFilter;
-      return matchSearch && matchClient && matchCategory && matchStatus;
+      return matchSearch && matchClient && matchFolder && matchCategory && matchStatus;
     });
-  }, [documents, search, clientFilter, categoryFilter, statusFilter]);
+  }, [documents, search, clientFilter, folderFilter, categoryFilter, statusFilter]);
 
   const getCategoryLabel = (value: string) =>
     DOCUMENT_CATEGORIES.find((c) => c.value === value)?.label ?? value;
+  const getFolderLabel = (value?: string) => value ?? "General";
 
   const getStatusInfo = (value: string) =>
     DOCUMENT_STATUS.find((s) => s.value === value) ?? { label: value, color: "" };
@@ -76,6 +80,21 @@ export default function DocumentsPanel({ initialDocuments, clients }: DocumentsP
     const res = await fetch(`/api/documents/${docId}`, { method: "DELETE" });
     if (res.ok) {
       setDocuments((prev) => prev.filter((d) => d.id !== docId));
+    }
+  };
+
+  const handleComment = async (docId: string, currentNotes?: string) => {
+    const notes = prompt("Add a client-facing comment/query for this document:", currentNotes ?? "");
+    if (notes === null) return;
+    const res = await fetch(`/api/documents/${docId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ notes }),
+    });
+    if (res.ok) {
+      setDocuments((prev) =>
+        prev.map((d) => (d.id === docId ? { ...d, notes } : d))
+      );
     }
   };
 
@@ -137,6 +156,16 @@ export default function DocumentsPanel({ initialDocuments, clients }: DocumentsP
             ))}
           </select>
           <select
+            value={folderFilter}
+            onChange={(e) => setFolderFilter(e.target.value)}
+            className="border border-slate-200 rounded-xl px-3 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-[#c9a84c]/50 bg-white"
+          >
+            <option value="all">All Folders</option>
+            {DOCUMENT_FOLDERS.map((folder) => (
+              <option key={folder} value={folder}>{folder}</option>
+            ))}
+          </select>
+          <select
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
             className="border border-slate-200 rounded-xl px-3 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-[#c9a84c]/50 bg-white"
@@ -165,7 +194,7 @@ export default function DocumentsPanel({ initialDocuments, clients }: DocumentsP
           <table className="w-full">
             <thead>
               <tr className="border-b border-slate-100">
-                {["Document", "Client", "Category", "Size", "Uploaded", "Status", "Actions"].map((h) => (
+                {["Document", "Client", "Folder", "Category", "Size", "Uploaded", "Status", "Actions"].map((h) => (
                   <th
                     key={h}
                     className="text-left px-5 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider whitespace-nowrap"
@@ -178,7 +207,7 @@ export default function DocumentsPanel({ initialDocuments, clients }: DocumentsP
             <tbody className="divide-y divide-slate-50">
               {filtered.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="px-6 py-16 text-center">
+                  <td colSpan={8} className="px-6 py-16 text-center">
                     <FileText className="w-10 h-10 text-slate-200 mx-auto mb-3" />
                     <p className="text-slate-400 text-sm">No documents match your filters</p>
                   </td>
@@ -197,6 +226,11 @@ export default function DocumentsPanel({ initialDocuments, clients }: DocumentsP
                             {doc.file_name}
                           </span>
                         </div>
+                        {doc.notes && (
+                          <p className="mt-1 text-xs text-amber-700 line-clamp-2">
+                            Query: {doc.notes}
+                          </p>
+                        )}
                       </td>
                       <td className="px-5 py-4">
                         <div>
@@ -207,6 +241,11 @@ export default function DocumentsPanel({ initialDocuments, clients }: DocumentsP
                             <p className="text-slate-400 text-xs">{doc.client.company}</p>
                           )}
                         </div>
+                      </td>
+                      <td className="px-5 py-4">
+                        <span className="text-slate-500 text-sm">
+                          {getFolderLabel(doc.folder)}
+                        </span>
                       </td>
                       <td className="px-5 py-4">
                         <span className="text-slate-500 text-sm">
@@ -255,6 +294,13 @@ export default function DocumentsPanel({ initialDocuments, clients }: DocumentsP
                           >
                             <Download className="w-3.5 h-3.5" />
                           </a>
+                          <button
+                            onClick={() => handleComment(doc.id, doc.notes)}
+                            className="w-8 h-8 rounded-lg bg-slate-50 hover:bg-amber-50 hover:text-amber-700 text-slate-500 flex items-center justify-center transition-colors"
+                            title="Add comment/query"
+                          >
+                            <MessageSquare className="w-3.5 h-3.5" />
+                          </button>
                           <button
                             onClick={() => handleDelete(doc.id, doc.file_name)}
                             className="w-8 h-8 rounded-lg bg-slate-50 hover:bg-red-50 hover:text-red-600 text-slate-500 flex items-center justify-center transition-colors"
