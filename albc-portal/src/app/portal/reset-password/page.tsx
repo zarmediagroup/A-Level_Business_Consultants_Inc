@@ -45,11 +45,11 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#060d1a] via-[#0b1d3a] to-[#060d1a] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        <div className="bg-[#0b1d3a]/80 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl">
+        <div className="bg-slate-900/80 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl">
           <div className="flex flex-col items-center mb-8">
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#c9a84c] to-[#a07830] flex items-center justify-center mb-4 shadow-lg">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-700 to-blue-900 flex items-center justify-center mb-4 shadow-lg">
               <Shield className="w-8 h-8 text-white" />
             </div>
             <h1 className="text-white font-bold text-xl">Set New Password</h1>
@@ -86,7 +86,7 @@ export default function ResetPasswordPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Min. 8 characters"
-                    className="w-full bg-white/5 border border-white/10 focus:border-[#c9a84c]/50 rounded-xl pl-11 pr-12 py-3.5 text-white placeholder-slate-600 text-sm outline-none transition-all"
+                    className="w-full bg-white/5 border border-white/10 focus:border-blue-600 rounded-xl pl-11 pr-12 py-3.5 text-white placeholder-slate-600 text-sm outline-none transition-all"
                   />
                   <button
                     type="button"
@@ -110,7 +110,7 @@ export default function ResetPasswordPage() {
                     value={confirm}
                     onChange={(e) => setConfirm(e.target.value)}
                     placeholder="Repeat your password"
-                    className="w-full bg-white/5 border border-white/10 focus:border-[#c9a84c]/50 rounded-xl pl-11 pr-4 py-3.5 text-white placeholder-slate-600 text-sm outline-none transition-all"
+                    className="w-full bg-white/5 border border-white/10 focus:border-blue-600 rounded-xl pl-11 pr-4 py-3.5 text-white placeholder-slate-600 text-sm outline-none transition-all"
                   />
                 </div>
               </div>
@@ -118,10 +118,10 @@ export default function ResetPasswordPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-[#c9a84c] hover:bg-[#b8923c] disabled:opacity-60 text-[#0b1d3a] font-bold py-3.5 rounded-xl transition-colors text-sm flex items-center justify-center gap-2"
+                className="w-full bg-blue-700 hover:bg-blue-800 disabled:opacity-60 text-white font-semibold py-3.5 rounded-xl transition-colors text-sm flex items-center justify-center gap-2"
               >
                 {loading ? (
-                  <div className="w-4 h-4 border-2 border-[#0b1d3a]/30 border-t-[#0b1d3a] rounded-full animate-spin" />
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                 ) : (
                   "Update Password"
                 )}

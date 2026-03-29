@@ -46,18 +46,18 @@ export default function AdminSidebar({ unreadCount = 0, adminName = "Admin" }: A
     <div className="flex flex-col h-full">
       {/* Logo */}
       <div className={cn(
-        "flex items-center gap-3 px-5 py-6 border-b border-white/5",
+        "flex items-center gap-3 px-5 py-6 border-b border-slate-800",
         collapsed && "justify-center px-3"
       )}>
-        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#c9a84c] to-[#a07830] flex items-center justify-center flex-shrink-0">
-          <Shield className="w-5 h-5 text-white" />
+        <div className="w-9 h-9 rounded-md bg-white flex items-center justify-center flex-shrink-0">
+          <Shield className="w-5 h-5 text-slate-900" />
         </div>
         {!collapsed && (
           <div className="overflow-hidden">
-            <div className="text-white font-bold text-sm leading-tight whitespace-nowrap">
+            <div className="text-white font-semibold text-sm leading-tight whitespace-nowrap">
               A-Level Business
             </div>
-            <div className="text-[#c9a84c] text-xs tracking-widest uppercase whitespace-nowrap">
+            <div className="text-blue-200/90 text-[10px] tracking-[0.15em] uppercase whitespace-nowrap">
               Admin Portal
             </div>
           </div>
@@ -80,8 +80,8 @@ export default function AdminSidebar({ unreadCount = 0, adminName = "Admin" }: A
               className={cn(
                 "flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-all duration-200 relative group",
                 isActive
-                  ? "sidebar-active text-[#c9a84c]"
-                  : "text-slate-400 hover:text-white hover:bg-white/5",
+                  ? "sidebar-active text-white"
+                  : "text-slate-400 hover:bg-white/5 hover:text-white",
                 collapsed && "justify-center"
               )}
             >
@@ -91,7 +91,7 @@ export default function AdminSidebar({ unreadCount = 0, adminName = "Admin" }: A
               )}
               {hasNotif && (
                 <span className={cn(
-                  "bg-[#c9a84c] text-[#0b1d3a] text-xs font-bold rounded-full flex-shrink-0",
+                  "bg-blue-700 text-white text-xs font-semibold rounded-full flex-shrink-0",
                   collapsed ? "absolute -top-1 -right-1 w-5 h-5 flex items-center justify-center text-[10px]" : "px-2 py-0.5"
                 )}>
                   {unreadCount > 99 ? "99+" : unreadCount}
@@ -99,7 +99,7 @@ export default function AdminSidebar({ unreadCount = 0, adminName = "Admin" }: A
               )}
               {/* Tooltip for collapsed */}
               {collapsed && (
-                <div className="absolute left-full ml-3 bg-[#1a2f5e] text-white text-xs px-3 py-2 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-lg">
+                <div className="absolute left-full ml-3 bg-slate-800 text-white text-xs px-3 py-2 rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-lg border border-slate-700">
                   {item.label}
                   {hasNotif && ` (${unreadCount})`}
                 </div>
@@ -110,12 +110,12 @@ export default function AdminSidebar({ unreadCount = 0, adminName = "Admin" }: A
       </nav>
 
       {/* Bottom: User + Collapse */}
-      <div className="border-t border-white/5 p-3 space-y-2">
+      <div className="border-t border-slate-800 p-3 space-y-2">
         {/* Admin info */}
         {!collapsed && (
           <div className="flex items-center gap-3 px-3 py-2 rounded-xl bg-white/5">
-            <div className="w-8 h-8 rounded-full bg-[#c9a84c]/20 border border-[#c9a84c]/30 flex items-center justify-center flex-shrink-0">
-              <span className="text-[#c9a84c] text-xs font-bold">
+            <div className="w-8 h-8 rounded-full bg-slate-700 border border-slate-600 flex items-center justify-center flex-shrink-0">
+              <span className="text-blue-100 text-xs font-semibold">
                 {adminName.charAt(0).toUpperCase()}
               </span>
             </div>
@@ -157,7 +157,7 @@ export default function AdminSidebar({ unreadCount = 0, adminName = "Admin" }: A
       {/* Mobile toggle */}
       <button
         onClick={() => setMobileOpen(!mobileOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 w-10 h-10 bg-[#0b1d3a] border border-white/10 rounded-xl flex items-center justify-center text-white shadow-lg"
+        className="lg:hidden fixed top-4 left-4 z-50 w-10 h-10 bg-slate-950 border border-slate-700 rounded-lg flex items-center justify-center text-white shadow-lg"
       >
         <Menu className="w-5 h-5" />
       </button>
@@ -173,7 +173,7 @@ export default function AdminSidebar({ unreadCount = 0, adminName = "Admin" }: A
       {/* Mobile sidebar */}
       <aside
         className={cn(
-          "lg:hidden fixed left-0 top-0 bottom-0 z-50 w-72 bg-[#0b1d3a] border-r border-white/5 transition-transform duration-300",
+          "lg:hidden fixed left-0 top-0 bottom-0 z-50 w-72 bg-slate-950 border-r border-slate-800 transition-transform duration-300",
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
@@ -183,7 +183,7 @@ export default function AdminSidebar({ unreadCount = 0, adminName = "Admin" }: A
       {/* Desktop sidebar */}
       <aside
         className={cn(
-          "hidden lg:flex flex-col bg-[#0b1d3a] border-r border-white/5 flex-shrink-0 transition-all duration-300",
+          "hidden lg:flex flex-col bg-slate-950 border-r border-slate-800 flex-shrink-0 transition-all duration-300",
           collapsed ? "w-[72px]" : "w-64"
         )}
       >

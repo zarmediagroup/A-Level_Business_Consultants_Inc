@@ -94,16 +94,16 @@ function LoginContent() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#060d1a] via-[#0b1d3a] to-[#060d1a] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center p-4">
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#c9a84c]/3 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#1a2f5e]/30 rounded-full blur-3xl" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-950/40 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-slate-800/30 rounded-full blur-3xl" />
         <div
-          className="absolute inset-0 opacity-[0.02]"
+          className="absolute inset-0 opacity-[0.04]"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(201,168,76,1) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,1) 1px, transparent 1px)",
+              "linear-gradient(rgba(148,163,184,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,0.4) 1px, transparent 1px)",
             backgroundSize: "60px 60px",
           }}
         />
@@ -114,17 +114,17 @@ function LoginContent() {
         <div className="text-center mb-8">
           <Link
             href="/"
-            className="text-slate-500 hover:text-[#c9a84c] text-sm transition-colors inline-flex items-center gap-1"
+            className="text-slate-500 hover:text-blue-800 text-sm transition-colors inline-flex items-center gap-1"
           >
             ← Back to website
           </Link>
         </div>
 
         {/* Card */}
-        <div className="bg-[#0b1d3a]/80 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl">
+        <div className="bg-slate-900/80 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl">
           {/* Logo */}
           <div className="flex flex-col items-center mb-8">
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#c9a84c] to-[#a07830] flex items-center justify-center mb-4 shadow-lg">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-700 to-blue-900 flex items-center justify-center mb-4 shadow-lg">
               <Shield className="w-8 h-8 text-white" />
             </div>
             <h1 className="text-white font-bold text-xl text-center">
@@ -139,29 +139,29 @@ function LoginContent() {
 
           {/* Demo Mode Banner */}
           {IS_DEMO && !resetMode && (
-            <div className="mb-6 rounded-xl overflow-hidden border border-[#c9a84c]/30">
-              <div className="bg-[#c9a84c]/10 px-4 py-3 flex items-center gap-2 border-b border-[#c9a84c]/20">
-                <Zap className="w-4 h-4 text-[#c9a84c] flex-shrink-0" />
-                <span className="text-[#c9a84c] text-xs font-bold tracking-wide uppercase">Demo Mode — No login required</span>
+            <div className="mb-6 rounded-xl overflow-hidden border border-blue-600/40">
+              <div className="bg-blue-950/50 px-4 py-3 flex items-center gap-2 border-b border-white/10">
+                <Zap className="w-4 h-4 text-blue-300 flex-shrink-0" />
+                <span className="text-blue-100 text-[11px] font-semibold tracking-wide uppercase">Demo mode — no login required</span>
               </div>
               <div className="p-4 space-y-2">
                 <button
                   onClick={() => router.push("/portal/admin/dashboard")}
-                  className="w-full flex items-center gap-3 bg-gradient-to-r from-[#0b1d3a] to-[#1a2f5e] hover:from-[#1a2f5e] hover:to-[#2a3f6f] text-white rounded-xl px-4 py-3 transition-all duration-200 group"
+                  className="w-full flex items-center gap-3 bg-gradient-to-r from-slate-900 to-slate-800 hover:from-slate-800 hover:to-slate-700 text-white rounded-xl px-4 py-3 transition-all duration-200 group"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-[#c9a84c]/20 flex items-center justify-center flex-shrink-0">
-                    <Users className="w-4 h-4 text-[#c9a84c]" />
+                  <div className="w-8 h-8 rounded-lg bg-blue-700/15 flex items-center justify-center flex-shrink-0">
+                    <Users className="w-4 h-4 text-blue-200" />
                   </div>
                   <div className="text-left flex-1">
                     <p className="font-bold text-sm">Admin Portal</p>
                     <p className="text-slate-400 text-xs">Full practice management dashboard</p>
                   </div>
-                  <span className="text-[#c9a84c] text-xs font-semibold group-hover:translate-x-0.5 transition-transform">Enter →</span>
+                  <span className="text-blue-200 text-xs font-medium group-hover:translate-x-0.5 transition-transform">Enter →</span>
                 </button>
 
                 <button
                   onClick={() => router.push("/portal/client/dashboard")}
-                  className="w-full flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#c9a84c]/30 text-white rounded-xl px-4 py-3 transition-all duration-200 group"
+                  className="w-full flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-blue-600/40 text-white rounded-xl px-4 py-3 transition-all duration-200 group"
                 >
                   <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
                     <User className="w-4 h-4 text-slate-300" />
@@ -170,7 +170,7 @@ function LoginContent() {
                     <p className="font-semibold text-sm">Client Portal</p>
                     <p className="text-slate-500 text-xs">Document vault & account view</p>
                   </div>
-                  <span className="text-slate-500 text-xs font-semibold group-hover:translate-x-0.5 transition-transform group-hover:text-[#c9a84c]">Enter →</span>
+                  <span className="text-slate-500 text-xs font-medium group-hover:translate-x-0.5 transition-transform group-hover:text-slate-300">Enter →</span>
                 </button>
               </div>
               <div className="px-4 pb-3">
@@ -202,7 +202,7 @@ function LoginContent() {
               </p>
               <button
                 onClick={() => { setResetMode(false); setResetSent(false); }}
-                className="text-[#c9a84c] hover:text-[#e0ce96] text-sm font-medium transition-colors"
+                className="text-blue-800 hover:text-blue-200 text-sm font-medium transition-colors"
               >
                 Back to login
               </button>
@@ -222,17 +222,17 @@ function LoginContent() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@company.co.za"
-                    className="w-full bg-white/5 border border-white/10 focus:border-[#c9a84c]/50 focus:ring-2 focus:ring-[#c9a84c]/10 rounded-xl pl-11 pr-4 py-3.5 text-white placeholder-slate-600 text-sm outline-none transition-all"
+                    className="w-full bg-white/5 border border-white/10 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/10 rounded-xl pl-11 pr-4 py-3.5 text-white placeholder-slate-600 text-sm outline-none transition-all"
                   />
                 </div>
               </div>
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-[#c9a84c] hover:bg-[#b8923c] disabled:opacity-60 text-[#0b1d3a] font-bold py-3.5 rounded-xl transition-colors text-sm flex items-center justify-center gap-2"
+                className="w-full bg-blue-700 hover:bg-blue-800 disabled:opacity-60 text-white font-semibold py-3.5 rounded-xl transition-colors text-sm flex items-center justify-center gap-2"
               >
                 {loading ? (
-                  <div className="w-4 h-4 border-2 border-[#0b1d3a]/30 border-t-[#0b1d3a] rounded-full animate-spin" />
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                 ) : (
                   "Send Reset Link"
                 )}
@@ -261,7 +261,7 @@ function LoginContent() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@company.co.za"
                     autoComplete="email"
-                    className="w-full bg-white/5 border border-white/10 focus:border-[#c9a84c]/50 focus:ring-2 focus:ring-[#c9a84c]/10 rounded-xl pl-11 pr-4 py-3.5 text-white placeholder-slate-600 text-sm outline-none transition-all"
+                    className="w-full bg-white/5 border border-white/10 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/10 rounded-xl pl-11 pr-4 py-3.5 text-white placeholder-slate-600 text-sm outline-none transition-all"
                   />
                 </div>
               </div>
@@ -272,7 +272,7 @@ function LoginContent() {
                   <button
                     type="button"
                     onClick={() => setResetMode(true)}
-                    className="text-[#c9a84c] hover:text-[#e0ce96] text-xs font-medium transition-colors"
+                    className="text-blue-800 hover:text-blue-200 text-xs font-medium transition-colors"
                   >
                     Forgot password?
                   </button>
@@ -286,7 +286,7 @@ function LoginContent() {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
                     autoComplete="current-password"
-                    className="w-full bg-white/5 border border-white/10 focus:border-[#c9a84c]/50 focus:ring-2 focus:ring-[#c9a84c]/10 rounded-xl pl-11 pr-12 py-3.5 text-white placeholder-slate-600 text-sm outline-none transition-all"
+                    className="w-full bg-white/5 border border-white/10 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/10 rounded-xl pl-11 pr-12 py-3.5 text-white placeholder-slate-600 text-sm outline-none transition-all"
                   />
                   <button
                     type="button"
@@ -301,11 +301,11 @@ function LoginContent() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-[#c9a84c] hover:bg-[#b8923c] disabled:opacity-60 text-[#0b1d3a] font-bold py-3.5 rounded-xl transition-all duration-200 text-sm flex items-center justify-center gap-2 shadow-lg hover:shadow-[#c9a84c]/20"
+                className="w-full bg-blue-700 hover:bg-blue-800 disabled:opacity-60 text-white font-semibold py-3.5 rounded-xl transition-all duration-200 text-sm flex items-center justify-center gap-2 shadow-lg hover:shadow-blue-900/20"
               >
                 {loading ? (
                   <>
-                    <div className="w-4 h-4 border-2 border-[#0b1d3a]/30 border-t-[#0b1d3a] rounded-full animate-spin" />
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                     Signing in...
                   </>
                 ) : (
@@ -335,7 +335,7 @@ function LoginContent() {
               e.preventDefault();
               router.push("/#contact");
             }}
-            className="text-[#c9a84c] hover:text-[#e0ce96] transition-colors font-medium"
+            className="text-blue-800 hover:text-blue-200 transition-colors font-medium"
           >
             Contact us to get access
           </a>
@@ -348,8 +348,8 @@ function LoginContent() {
 export default function LoginPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-gradient-to-br from-[#060d1a] via-[#0b1d3a] to-[#060d1a] flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-[#c9a84c]/30 border-t-[#c9a84c] rounded-full animate-spin" />
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-slate-600 border-t-white rounded-full animate-spin" />
       </div>
     }>
       <LoginContent />

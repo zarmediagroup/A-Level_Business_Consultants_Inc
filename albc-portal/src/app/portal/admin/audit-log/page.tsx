@@ -39,7 +39,7 @@ function AuditLogPageContent({ logs }: { logs: any[] }) {
   return (
     <div className="p-6 lg:p-8 max-w-[1400px] mx-auto">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-[#0b1d3a]">Audit Log</h1>
+        <h1 className="text-2xl font-bold text-slate-900">Audit Log</h1>
         <p className="text-slate-500 text-sm mt-1">
           Immutable record of all portal activity — {(logs ?? []).length} entries
         </p>
@@ -92,7 +92,7 @@ function AuditLogPageContent({ logs }: { logs: any[] }) {
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2">
                           <Icon className={`w-4 h-4 flex-shrink-0 ${config.color}`} />
-                          <span className="text-[#0b1d3a] text-sm font-medium">
+                          <span className="text-slate-900 text-sm font-medium">
                             {config.label}
                           </span>
                         </div>
@@ -100,7 +100,7 @@ function AuditLogPageContent({ logs }: { logs: any[] }) {
                       <td className="px-6 py-4">
                         {logUser ? (
                           <div>
-                            <p className="text-[#0b1d3a] text-sm font-medium">{logUser.full_name}</p>
+                            <p className="text-slate-900 text-sm font-medium">{logUser.full_name}</p>
                             <p className="text-slate-400 text-xs capitalize">{logUser.role}</p>
                           </div>
                         ) : (

@@ -62,7 +62,7 @@ export default function ClientModal({ client, onClose, onSaved }: ClientModalPro
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-slate-100">
           <div>
-            <h2 className="text-lg font-bold text-[#0b1d3a]">
+            <h2 className="text-lg font-bold text-slate-900">
               {isEdit ? "Edit Client" : "Add New Client"}
             </h2>
             <p className="text-slate-500 text-xs mt-0.5">
@@ -86,7 +86,7 @@ export default function ClientModal({ client, onClose, onSaved }: ClientModalPro
 
           {/* Full Name */}
           <div>
-            <label className="block text-sm font-medium text-[#0b1d3a] mb-2">
+            <label className="block text-sm font-medium text-slate-900 mb-2">
               Full Name <span className="text-red-500">*</span>
             </label>
             <div className="relative">
@@ -97,14 +97,14 @@ export default function ClientModal({ client, onClose, onSaved }: ClientModalPro
                 value={form.full_name}
                 onChange={(e) => setForm({ ...form, full_name: e.target.value })}
                 placeholder="Client Full Name"
-                className="w-full pl-10 pr-4 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#c9a84c]/50 focus:ring-2 focus:ring-[#c9a84c]/10 text-slate-800"
+                className="w-full pl-10 pr-4 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/10 text-slate-800"
               />
             </div>
           </div>
 
           {/* Email */}
           <div>
-            <label className="block text-sm font-medium text-[#0b1d3a] mb-2">
+            <label className="block text-sm font-medium text-slate-900 mb-2">
               Email Address <span className="text-red-500">*</span>
             </label>
             <div className="relative">
@@ -116,7 +116,7 @@ export default function ClientModal({ client, onClose, onSaved }: ClientModalPro
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 placeholder="client@company.co.za"
                 disabled={isEdit}
-                className="w-full pl-10 pr-4 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#c9a84c]/50 focus:ring-2 focus:ring-[#c9a84c]/10 text-slate-800 disabled:bg-slate-50 disabled:text-slate-400"
+                className="w-full pl-10 pr-4 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/10 text-slate-800 disabled:bg-slate-50 disabled:text-slate-400"
               />
             </div>
             {isEdit && (
@@ -127,7 +127,7 @@ export default function ClientModal({ client, onClose, onSaved }: ClientModalPro
           {/* Password (only on create) */}
           {!isEdit && (
             <div>
-              <label className="block text-sm font-medium text-[#0b1d3a] mb-2">
+              <label className="block text-sm font-medium text-slate-900 mb-2">
                 Temporary Password <span className="text-red-500">*</span>
               </label>
               <div className="relative">
@@ -139,7 +139,7 @@ export default function ClientModal({ client, onClose, onSaved }: ClientModalPro
                   onChange={(e) => setForm({ ...form, password: e.target.value })}
                   placeholder="Min. 8 characters"
                   minLength={8}
-                  className="w-full pl-10 pr-12 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#c9a84c]/50 focus:ring-2 focus:ring-[#c9a84c]/10 text-slate-800"
+                  className="w-full pl-10 pr-12 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/10 text-slate-800"
                 />
                 <button
                   type="button"
@@ -158,7 +158,7 @@ export default function ClientModal({ client, onClose, onSaved }: ClientModalPro
           <div className="grid grid-cols-2 gap-4">
             {/* Phone */}
             <div>
-              <label className="block text-sm font-medium text-[#0b1d3a] mb-2">
+              <label className="block text-sm font-medium text-slate-900 mb-2">
                 Phone Number
               </label>
               <div className="relative">
@@ -168,14 +168,14 @@ export default function ClientModal({ client, onClose, onSaved }: ClientModalPro
                   value={form.phone}
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
                   placeholder="+27 82 000 0000"
-                  className="w-full pl-10 pr-4 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#c9a84c]/50 focus:ring-2 focus:ring-[#c9a84c]/10 text-slate-800"
+                  className="w-full pl-10 pr-4 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/10 text-slate-800"
                 />
               </div>
             </div>
 
             {/* Company */}
             <div>
-              <label className="block text-sm font-medium text-[#0b1d3a] mb-2">
+              <label className="block text-sm font-medium text-slate-900 mb-2">
                 Company / Business
               </label>
               <div className="relative">
@@ -185,7 +185,7 @@ export default function ClientModal({ client, onClose, onSaved }: ClientModalPro
                   value={form.company}
                   onChange={(e) => setForm({ ...form, company: e.target.value })}
                   placeholder="Business name"
-                  className="w-full pl-10 pr-4 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#c9a84c]/50 focus:ring-2 focus:ring-[#c9a84c]/10 text-slate-800"
+                  className="w-full pl-10 pr-4 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/10 text-slate-800"
                 />
               </div>
             </div>
@@ -193,7 +193,7 @@ export default function ClientModal({ client, onClose, onSaved }: ClientModalPro
 
           {/* Service Category */}
           <div>
-            <label className="block text-sm font-medium text-[#0b1d3a] mb-2">
+            <label className="block text-sm font-medium text-slate-900 mb-2">
               Service Category
             </label>
             <div className="relative">
@@ -201,7 +201,7 @@ export default function ClientModal({ client, onClose, onSaved }: ClientModalPro
               <select
                 value={form.service_category}
                 onChange={(e) => setForm({ ...form, service_category: e.target.value })}
-                className="w-full pl-10 pr-4 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#c9a84c]/50 focus:ring-2 focus:ring-[#c9a84c]/10 text-slate-800 bg-white"
+                className="w-full pl-10 pr-4 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/10 text-slate-800 bg-white"
               >
                 <option value="">Select a service...</option>
                 {SERVICE_CATEGORIES.map((s) => (
@@ -215,7 +215,7 @@ export default function ClientModal({ client, onClose, onSaved }: ClientModalPro
           {isEdit && (
             <div className="flex items-center justify-between py-3 px-4 bg-slate-50 rounded-xl">
               <div>
-                <p className="text-sm font-medium text-[#0b1d3a]">Account Status</p>
+                <p className="text-sm font-medium text-slate-900">Account Status</p>
                 <p className="text-xs text-slate-400 mt-0.5">
                   Inactive clients cannot log in to the portal
                 </p>
@@ -224,7 +224,7 @@ export default function ClientModal({ client, onClose, onSaved }: ClientModalPro
                 type="button"
                 onClick={() => setForm({ ...form, is_active: !form.is_active })}
                 className={`relative w-12 h-6 rounded-full transition-colors duration-200 flex-shrink-0 ${
-                  form.is_active ? "bg-[#0b1d3a]" : "bg-slate-300"
+                  form.is_active ? "bg-slate-900" : "bg-slate-300"
                 }`}
               >
                 <span
@@ -248,7 +248,7 @@ export default function ClientModal({ client, onClose, onSaved }: ClientModalPro
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 bg-[#0b1d3a] hover:bg-[#1a2f5e] disabled:opacity-60 text-white font-semibold text-sm py-3 rounded-xl transition-colors flex items-center justify-center gap-2"
+              className="flex-1 bg-slate-900 hover:bg-slate-800 disabled:opacity-60 text-white font-semibold text-sm py-3 rounded-xl transition-colors flex items-center justify-center gap-2"
             >
               {loading ? (
                 <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />

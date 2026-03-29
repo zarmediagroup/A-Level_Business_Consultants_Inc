@@ -10,7 +10,7 @@ export default async function ClientLayout({
 }) {
   if (isDemoMode()) {
     return (
-      <div className="flex h-screen bg-[#f0f2f8] overflow-hidden">
+      <div className="flex h-screen bg-slate-50 overflow-hidden">
         <ClientSidebar clientName="Demo Client" unreadCount={1} />
         <main className="flex-1 overflow-y-auto">{children}</main>
       </div>
@@ -38,7 +38,7 @@ export default async function ClientLayout({
     .eq("read", false);
 
   return (
-    <div className="flex h-screen bg-[#f0f2f8] overflow-hidden">
+    <div className="flex h-screen bg-slate-50 overflow-hidden">
       <ClientSidebar
         clientName={profile.full_name}
         unreadCount={unreadCount ?? 0}

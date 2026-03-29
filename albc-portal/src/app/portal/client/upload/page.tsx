@@ -139,7 +139,7 @@ export default function UploadPage() {
           <div className="w-20 h-20 rounded-full bg-green-50 border-2 border-green-200 flex items-center justify-center mx-auto mb-6">
             <CheckCircle className="w-10 h-10 text-green-500" />
           </div>
-          <h2 className="text-2xl font-bold text-[#0b1d3a] mb-3">
+          <h2 className="text-2xl font-bold text-slate-900 mb-3">
             Documents Submitted!
           </h2>
           <p className="text-slate-500 leading-relaxed mb-8">
@@ -149,7 +149,7 @@ export default function UploadPage() {
           <div className="flex gap-4 justify-center">
             <Link
               href="/portal/client/documents"
-              className="bg-[#0b1d3a] hover:bg-[#1a2f5e] text-white font-semibold px-6 py-3 rounded-xl transition-colors text-sm"
+              className="bg-slate-900 hover:bg-slate-800 text-white font-semibold px-6 py-3 rounded-xl transition-colors text-sm"
             >
               View My Documents
             </Link>
@@ -168,7 +168,7 @@ export default function UploadPage() {
   return (
     <div className="p-6 lg:p-8 max-w-3xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-[#0b1d3a]">Upload Documents</h1>
+        <h1 className="text-2xl font-bold text-slate-900">Upload Documents</h1>
         <p className="text-slate-500 text-sm mt-1">
           Securely upload your financial documents into template folders. Accepted: PDF, Word, Excel, JPEG, PNG (max 25MB each)
         </p>
@@ -179,23 +179,23 @@ export default function UploadPage() {
         {...getRootProps()}
         className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all duration-200 mb-6 ${
           isDragActive
-            ? "drop-zone-active border-[#c9a84c]"
-            : "border-slate-200 hover:border-[#c9a84c]/50 hover:bg-[#c9a84c]/2"
+            ? "drop-zone-active border-blue-700"
+            : "border-slate-200 hover:border-blue-600/50 hover:bg-blue-50"
         }`}
       >
         <input {...getInputProps()} />
-        <div className="w-16 h-16 rounded-2xl bg-[#0b1d3a]/5 flex items-center justify-center mx-auto mb-4">
-          <Upload className={`w-8 h-8 ${isDragActive ? "text-[#c9a84c]" : "text-[#0b1d3a]/30"}`} />
+        <div className="w-16 h-16 rounded-2xl bg-slate-900/5 flex items-center justify-center mx-auto mb-4">
+          <Upload className={`w-8 h-8 ${isDragActive ? "text-blue-800" : "text-slate-900/30"}`} />
         </div>
         {isDragActive ? (
-          <p className="text-[#c9a84c] font-semibold">Drop your files here...</p>
+          <p className="text-blue-800 font-semibold">Drop your files here...</p>
         ) : (
           <>
-            <p className="text-[#0b1d3a] font-semibold mb-1">
+            <p className="text-slate-900 font-semibold mb-1">
               Drag & drop files here
             </p>
             <p className="text-slate-400 text-sm mb-4">or click to browse files</p>
-            <span className="inline-flex items-center gap-2 bg-[#0b1d3a] text-white text-sm font-semibold px-5 py-2.5 rounded-xl">
+            <span className="inline-flex items-center gap-2 bg-slate-900 text-white text-sm font-semibold px-5 py-2.5 rounded-xl">
               <FileText className="w-4 h-4" />
               Choose Files
             </span>
@@ -224,17 +224,17 @@ export default function UploadPage() {
                 ) : uf.status === "error" ? (
                   <AlertCircle className="w-8 h-8 text-red-500" />
                 ) : uf.status === "uploading" ? (
-                  <div className="w-8 h-8 border-2 border-[#c9a84c]/30 border-t-[#c9a84c] rounded-full animate-spin" />
+                  <div className="w-8 h-8 border-2 border-blue-600/40 border-t-blue-700 rounded-full animate-spin" />
                 ) : (
-                  <div className="w-8 h-8 rounded-xl bg-[#0b1d3a]/5 flex items-center justify-center">
-                    <File className="w-4 h-4 text-[#0b1d3a]/40" />
+                  <div className="w-8 h-8 rounded-xl bg-slate-900/5 flex items-center justify-center">
+                    <File className="w-4 h-4 text-slate-900/40" />
                   </div>
                 )}
               </div>
 
               {/* File info */}
               <div className="flex-1 min-w-0">
-                <p className="text-[#0b1d3a] text-sm font-semibold truncate">{uf.file.name}</p>
+                <p className="text-slate-900 text-sm font-semibold truncate">{uf.file.name}</p>
                 <div className="flex items-center gap-3 mt-1">
                   <span className="text-slate-400 text-xs">{formatFileSize(uf.file.size)}</span>
                   {uf.status === "error" && (
@@ -252,7 +252,7 @@ export default function UploadPage() {
                   <select
                     value={uf.folder}
                     onChange={(e) => updateFolder(uf.id, e.target.value)}
-                    className="border border-slate-200 rounded-xl px-3 py-2 text-sm text-slate-700 focus:outline-none focus:border-[#c9a84c]/50 bg-white"
+                    className="border border-slate-200 rounded-xl px-3 py-2 text-sm text-slate-700 focus:outline-none focus:border-blue-600 bg-white"
                   >
                     {DOCUMENT_FOLDERS.map((folder) => (
                       <option key={folder} value={folder}>{folder}</option>
@@ -261,7 +261,7 @@ export default function UploadPage() {
                   <select
                     value={uf.category}
                     onChange={(e) => updateCategory(uf.id, e.target.value)}
-                    className="border border-slate-200 rounded-xl px-3 py-2 text-sm text-slate-700 focus:outline-none focus:border-[#c9a84c]/50 bg-white"
+                    className="border border-slate-200 rounded-xl px-3 py-2 text-sm text-slate-700 focus:outline-none focus:border-blue-600 bg-white"
                   >
                     {DOCUMENT_CATEGORIES.map((c) => (
                       <option key={c.value} value={c.value}>{c.label}</option>
@@ -289,7 +289,7 @@ export default function UploadPage() {
         <button
           onClick={handleUpload}
           disabled={uploading}
-          className="w-full flex items-center justify-center gap-2 bg-[#0b1d3a] hover:bg-[#1a2f5e] disabled:opacity-60 text-white font-bold py-4 rounded-2xl transition-colors text-sm"
+          className="w-full flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 disabled:opacity-60 text-white font-bold py-4 rounded-2xl transition-colors text-sm"
         >
           {uploading ? (
             <>

@@ -44,14 +44,14 @@ export default function ClientDocumentsPanel({ initialDocuments }: ClientDocumen
     <div className="p-6 lg:p-8 max-w-5xl mx-auto">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-[#0b1d3a]">My Documents</h1>
+          <h1 className="text-2xl font-bold text-slate-900">My Documents</h1>
           <p className="text-slate-500 text-sm mt-1">
             {initialDocuments.length} document{initialDocuments.length !== 1 ? "s" : ""} in your secure vault
           </p>
         </div>
         <Link
           href="/portal/client/upload"
-          className="flex items-center gap-2 bg-[#0b1d3a] hover:bg-[#1a2f5e] text-white font-semibold text-sm px-5 py-2.5 rounded-xl transition-colors"
+          className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm px-5 py-2.5 rounded-xl transition-colors"
         >
           <Upload className="w-4 h-4" />
           Upload Document
@@ -67,7 +67,7 @@ export default function ClientDocumentsPanel({ initialDocuments }: ClientDocumen
               key={s.value}
               onClick={() => setStatusFilter(s.value === statusFilter ? "all" : s.value)}
               className={`rounded-xl p-4 text-left transition-all ${
-                statusFilter === s.value ? "ring-2 ring-[#0b1d3a] ring-offset-1" : ""
+                statusFilter === s.value ? "ring-2 ring-slate-900 ring-offset-1" : ""
               } ${s.color}`}
             >
               <div className="text-2xl font-bold">{count}</div>
@@ -86,7 +86,7 @@ export default function ClientDocumentsPanel({ initialDocuments }: ClientDocumen
             placeholder="Search documents..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#c9a84c]/50 focus:ring-2 focus:ring-[#c9a84c]/10 text-slate-800"
+            className="w-full pl-10 pr-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/10 text-slate-800"
           />
         </div>
         <div className="flex items-center gap-3">
@@ -140,7 +140,7 @@ export default function ClientDocumentsPanel({ initialDocuments }: ClientDocumen
                     {!search && categoryFilter === "all" && statusFilter === "all" && (
                       <Link
                         href="/portal/client/upload"
-                        className="inline-flex items-center gap-2 bg-[#0b1d3a] text-white text-sm font-semibold px-5 py-2.5 rounded-xl"
+                        className="inline-flex items-center gap-2 bg-slate-900 text-white text-sm font-semibold px-5 py-2.5 rounded-xl"
                       >
                         <Upload className="w-4 h-4" />
                         Upload Now
@@ -155,10 +155,10 @@ export default function ClientDocumentsPanel({ initialDocuments }: ClientDocumen
                     <tr key={doc.id} className="table-row-hover">
                       <td className="px-5 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-xl bg-[#0b1d3a]/5 flex items-center justify-center flex-shrink-0">
-                            <FileText className="w-4 h-4 text-[#0b1d3a]/30" />
+                          <div className="w-9 h-9 rounded-xl bg-slate-900/5 flex items-center justify-center flex-shrink-0">
+                            <FileText className="w-4 h-4 text-slate-900/30" />
                           </div>
-                          <span className="text-[#0b1d3a] text-sm font-semibold truncate max-w-[180px]">
+                          <span className="text-slate-900 text-sm font-semibold truncate max-w-[180px]">
                             {doc.file_name}
                           </span>
                         </div>
@@ -189,7 +189,7 @@ export default function ClientDocumentsPanel({ initialDocuments }: ClientDocumen
                       <td className="px-5 py-4">
                         <a
                           href={`/api/documents/${doc.id}/download`}
-                          className="w-8 h-8 rounded-lg bg-slate-50 hover:bg-[#0b1d3a] hover:text-white text-slate-500 flex items-center justify-center transition-colors"
+                          className="w-8 h-8 rounded-lg bg-slate-50 hover:bg-slate-900 hover:text-white text-slate-500 flex items-center justify-center transition-colors"
                           title="Download"
                         >
                           <Download className="w-3.5 h-3.5" />

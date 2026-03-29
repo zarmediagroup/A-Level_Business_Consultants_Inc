@@ -1,25 +1,26 @@
 "use client";
 
 import { CheckCircle2, Target, Eye, Heart } from "lucide-react";
+import { MarketingSectionHeader } from "./MarketingSectionHeader";
 
 const values = [
   {
     icon: Target,
     title: "Precision",
     description:
-      "Every figure, every filing, every report — executed with meticulous attention to detail and zero tolerance for error.",
+      "Figures, filings, and reports handled with consistent rigour and documented review.",
   },
   {
     icon: Eye,
     title: "Transparency",
     description:
-      "Clear, honest communication. No hidden fees, no jargon — just straightforward advice you can trust.",
+      "Agreed scope, predictable fees, and plain-language explanations — before you commit.",
   },
   {
     icon: Heart,
     title: "Partnership",
     description:
-      "We invest in understanding your business so we can provide proactive guidance, not just reactive compliance.",
+      "We learn how your business works so guidance is forward-looking, not only reactive.",
   },
 ];
 
@@ -28,124 +29,99 @@ const highlights = [
   "CIPC accredited for company registrations",
   "Comprehensive professional indemnity insurance",
   "Dedicated account manager for every client",
-  "Strict client confidentiality and data protection",
-  "Rapid turnaround on all engagements",
+  "Strict confidentiality and data protection",
+  "Predictable turnaround on engagements",
 ];
 
 export default function About() {
   return (
-    <section id="about" className="py-28 bg-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 bg-[#0b1d3a]/5 border border-[#0b1d3a]/10 rounded-full px-4 py-2 mb-6">
-            <span className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase">
-              About Our Practice
-            </span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-[#0b1d3a] mb-6">
-            Built on Trust.{" "}
-            <span className="text-[#c9a84c]">Driven by Excellence.</span>
-          </h2>
-          <p className="text-slate-500 text-lg max-w-2xl mx-auto leading-relaxed">
-            A-Level Business Consultants Inc was founded with a singular purpose: to give
-            South African businesses access to the same calibre of financial expertise
-            previously reserved for large corporations.
-          </p>
-        </div>
+    <section id="about" className="border-t border-slate-200/80 bg-white py-20 md:py-24">
+      <div className="mx-auto max-w-6xl px-5 lg:px-8">
+        <MarketingSectionHeader
+          kicker="About"
+          title={
+            <>
+              A practice built on <span className="text-slate-600">trust and discipline</span>
+            </>
+          }
+          description="South African businesses engage us for the same technical standard you would expect from a larger firm — with direct partner access and a single point of accountability."
+        />
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center mb-24">
-          {/* Left: Story */}
+        <div className="mb-20 grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
-            <h3 className="text-2xl font-bold text-[#0b1d3a] mb-6">
-              A Decade of Delivering Results
+            <h3 className="font-display text-xl font-normal text-slate-900 md:text-2xl">
+              Ten years of consistent delivery
             </h3>
-            <div className="space-y-4 text-slate-600 leading-relaxed">
+            <div className="mt-5 space-y-4 text-[15px] leading-[1.65] text-slate-600">
               <p>
-                Founded in 2015, A-Level Business Consultants Inc has grown from a
-                boutique practice into a trusted partner for entrepreneurs, SMEs, and
-                established businesses across South Africa. Our team combines deep
-                technical expertise with genuine care for our clients' financial wellbeing.
+                Since 2015 we have supported entrepreneurs, SMEs, and established companies
+                nationwide. Technical depth matters, but so does judgment under deadlines —
+                we staff engagements accordingly.
               </p>
               <p>
-                We understand that behind every set of accounts is a business owner
-                working hard to build something meaningful. Our role is to protect,
-                optimise, and grow what you've built — ensuring your finances are always
-                in order so you can focus on what you do best.
-              </p>
-              <p>
-                From day-to-day bookkeeping to complex tax structuring, we provide
-                end-to-end financial management that gives you clarity, compliance,
-                and confidence.
+                Your accounts represent more than compliance: they reflect years of work. We
+                treat that seriously, from bookkeeping through to tax and structuring.
               </p>
             </div>
 
-            {/* Highlights */}
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <ul className="mt-8 grid gap-3 sm:grid-cols-2">
               {highlights.map((item) => (
-                <div key={item} className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-[#c9a84c] flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-600 text-sm">{item}</span>
+                <li key={item} className="flex gap-3 text-sm text-slate-600">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" strokeWidth={1.75} />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <aside className="border border-slate-200 bg-slate-50/50 p-8 md:p-9">
+            <blockquote className="border-l-2 border-slate-900 pl-5 text-[15px] leading-[1.65] text-slate-700">
+              To be the financial partner our clients call first — for compliance, for
+              planning, and when something unexpected lands on their desk.
+            </blockquote>
+            <div className="mt-8 flex items-center gap-3 border-t border-slate-200 pt-8">
+              <div className="flex h-10 w-10 items-center justify-center border border-slate-300 bg-white text-xs font-semibold text-slate-800">
+                AL
+              </div>
+              <div>
+                <p className="text-sm font-medium text-slate-900">A-Level Business Consultants Inc</p>
+                <p className="text-xs text-slate-500">Practice standard</p>
+              </div>
+            </div>
+            <div className="mt-8 grid grid-cols-3 gap-4 border-t border-slate-200 pt-8 text-center">
+              {[
+                { n: "2015", l: "Founded" },
+                { n: "30+", l: "Services" },
+                { n: "100%", l: "Compliance" },
+              ].map((s) => (
+                <div key={s.l}>
+                  <div className="font-display text-lg font-normal tabular-nums text-slate-900">{s.n}</div>
+                  <div className="mt-1 text-[10px] font-medium uppercase tracking-[0.14em] text-slate-500">
+                    {s.l}
+                  </div>
                 </div>
               ))}
             </div>
-          </div>
-
-          {/* Right: Visual */}
-          <div className="relative">
-            <div className="bg-gradient-to-br from-[#0b1d3a] to-[#1a2f5e] rounded-2xl p-8 text-white">
-              <div className="gold-divider mb-8" />
-              <blockquote className="text-lg leading-relaxed text-slate-200 mb-8 italic">
-                &ldquo;Our mission is simple: to be the most trusted financial partner for
-                every business we serve — delivering expertise, integrity, and results
-                that make a measurable difference to your bottom line.&rdquo;
-              </blockquote>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#c9a84c]/20 border-2 border-[#c9a84c] flex items-center justify-center">
-                  <span className="text-[#c9a84c] font-bold text-sm">AL</span>
-                </div>
-                <div>
-                  <p className="font-semibold text-white">A-Level Business Consultants Inc</p>
-                  <p className="text-slate-400 text-sm">Founding Principle</p>
-                </div>
-              </div>
-              <div className="gold-divider mt-8" />
-
-              {/* Quick stats */}
-              <div className="mt-8 grid grid-cols-3 gap-4 text-center">
-                {[
-                  { n: "2015", l: "Established" },
-                  { n: "30+", l: "Service Lines" },
-                  { n: "100%", l: "Compliance Rate" },
-                ].map((s) => (
-                  <div key={s.l}>
-                    <div className="text-2xl font-bold text-[#c9a84c]">{s.n}</div>
-                    <div className="text-slate-400 text-xs mt-1">{s.l}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          </aside>
         </div>
 
-        {/* Values */}
         <div>
-          <h3 className="text-2xl font-bold text-[#0b1d3a] text-center mb-12">
-            Our Core Values
+          <h3 className="font-display mb-10 text-center text-xl font-normal text-slate-900 md:text-2xl">
+            How we work with clients
           </h3>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid gap-px bg-slate-200 md:grid-cols-3">
             {values.map((value) => {
               const Icon = value.icon;
               return (
                 <div
                   key={value.title}
-                  className="group p-8 rounded-2xl border border-slate-100 hover:border-[#c9a84c]/30 hover:shadow-lg hover:shadow-[#c9a84c]/5 transition-all duration-300 bg-white"
+                  className="bg-white p-8 transition-colors md:p-9 md:hover:bg-slate-50/80"
                 >
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#0b1d3a] to-[#1a2f5e] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <Icon className="w-7 h-7 text-[#c9a84c]" />
+                  <div className="mb-5 flex h-9 w-9 items-center justify-center border border-slate-200 bg-white">
+                    <Icon className="h-4 w-4 text-slate-700" strokeWidth={1.5} />
                   </div>
-                  <h4 className="text-xl font-bold text-[#0b1d3a] mb-3">{value.title}</h4>
-                  <p className="text-slate-500 leading-relaxed text-sm">{value.description}</p>
+                  <h4 className="text-[15px] font-semibold text-slate-900">{value.title}</h4>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600">{value.description}</p>
                 </div>
               );
             })}

@@ -103,7 +103,7 @@ export default function DocumentsPanel({ initialDocuments, clients }: DocumentsP
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-[#0b1d3a]">Document Management</h1>
+          <h1 className="text-2xl font-bold text-slate-900">Document Management</h1>
           <p className="text-slate-500 text-sm mt-1">
             {documents.length} total documents across all clients
           </p>
@@ -118,7 +118,7 @@ export default function DocumentsPanel({ initialDocuments, clients }: DocumentsP
                 onClick={() => setStatusFilter(s.value === statusFilter ? "all" : s.value)}
                 className={`inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full border transition-colors ${
                   statusFilter === s.value
-                    ? "border-[#0b1d3a] bg-[#0b1d3a] text-white"
+                    ? "border-slate-900 bg-slate-900 text-white"
                     : `${s.color} border-transparent hover:border-current`
                 }`}
               >
@@ -138,7 +138,7 @@ export default function DocumentsPanel({ initialDocuments, clients }: DocumentsP
             placeholder="Search by file name or client..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#c9a84c]/50 focus:ring-2 focus:ring-[#c9a84c]/10 text-slate-800"
+            className="w-full pl-10 pr-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/10 text-slate-800"
           />
         </div>
         <div className="flex flex-wrap items-center gap-3">
@@ -146,7 +146,7 @@ export default function DocumentsPanel({ initialDocuments, clients }: DocumentsP
           <select
             value={clientFilter}
             onChange={(e) => setClientFilter(e.target.value)}
-            className="border border-slate-200 rounded-xl px-3 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-[#c9a84c]/50 bg-white"
+            className="border border-slate-200 rounded-xl px-3 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-blue-600 bg-white"
           >
             <option value="all">All Clients</option>
             {clients.map((c) => (
@@ -158,7 +158,7 @@ export default function DocumentsPanel({ initialDocuments, clients }: DocumentsP
           <select
             value={folderFilter}
             onChange={(e) => setFolderFilter(e.target.value)}
-            className="border border-slate-200 rounded-xl px-3 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-[#c9a84c]/50 bg-white"
+            className="border border-slate-200 rounded-xl px-3 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-blue-600 bg-white"
           >
             <option value="all">All Folders</option>
             {DOCUMENT_FOLDERS.map((folder) => (
@@ -168,7 +168,7 @@ export default function DocumentsPanel({ initialDocuments, clients }: DocumentsP
           <select
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
-            className="border border-slate-200 rounded-xl px-3 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-[#c9a84c]/50 bg-white"
+            className="border border-slate-200 rounded-xl px-3 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-blue-600 bg-white"
           >
             <option value="all">All Categories</option>
             {DOCUMENT_CATEGORIES.map((c) => (
@@ -178,7 +178,7 @@ export default function DocumentsPanel({ initialDocuments, clients }: DocumentsP
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="border border-slate-200 rounded-xl px-3 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-[#c9a84c]/50 bg-white"
+            className="border border-slate-200 rounded-xl px-3 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-blue-600 bg-white"
           >
             <option value="all">All Status</option>
             {DOCUMENT_STATUS.map((s) => (
@@ -219,10 +219,10 @@ export default function DocumentsPanel({ initialDocuments, clients }: DocumentsP
                     <tr key={doc.id} className="table-row-hover transition-colors">
                       <td className="px-5 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-xl bg-[#0b1d3a]/5 flex items-center justify-center flex-shrink-0">
-                            <FileText className="w-4 h-4 text-[#0b1d3a]/30" />
+                          <div className="w-9 h-9 rounded-xl bg-slate-900/5 flex items-center justify-center flex-shrink-0">
+                            <FileText className="w-4 h-4 text-slate-900/30" />
                           </div>
-                          <span className="text-[#0b1d3a] text-sm font-semibold truncate max-w-[160px]">
+                          <span className="text-slate-900 text-sm font-semibold truncate max-w-[160px]">
                             {doc.file_name}
                           </span>
                         </div>
@@ -234,7 +234,7 @@ export default function DocumentsPanel({ initialDocuments, clients }: DocumentsP
                       </td>
                       <td className="px-5 py-4">
                         <div>
-                          <p className="text-[#0b1d3a] text-sm font-medium">
+                          <p className="text-slate-900 text-sm font-medium">
                             {doc.client?.full_name ?? "—"}
                           </p>
                           {doc.client?.company && (
@@ -275,7 +275,7 @@ export default function DocumentsPanel({ initialDocuments, clients }: DocumentsP
                             <select
                               value={doc.status}
                               onChange={(e) => handleStatusChange(doc.id, e.target.value)}
-                              className="text-xs border border-slate-200 rounded-lg px-2 py-1 bg-white text-slate-600 focus:outline-none focus:border-[#c9a84c]/50"
+                              className="text-xs border border-slate-200 rounded-lg px-2 py-1 bg-white text-slate-600 focus:outline-none focus:border-blue-600"
                               title="Change status"
                             >
                               {DOCUMENT_STATUS.map((s) => (
@@ -289,7 +289,7 @@ export default function DocumentsPanel({ initialDocuments, clients }: DocumentsP
                         <div className="flex items-center gap-2">
                           <a
                             href={`/api/documents/${doc.id}/download`}
-                            className="w-8 h-8 rounded-lg bg-slate-50 hover:bg-[#0b1d3a] hover:text-white text-slate-500 flex items-center justify-center transition-colors"
+                            className="w-8 h-8 rounded-lg bg-slate-50 hover:bg-slate-900 hover:text-white text-slate-500 flex items-center justify-center transition-colors"
                             title="Download"
                           >
                             <Download className="w-3.5 h-3.5" />

@@ -10,7 +10,7 @@ export default async function AdminLayout({
 }) {
   if (isDemoMode()) {
     return (
-      <div className="flex h-screen bg-[#f0f2f8] overflow-hidden">
+      <div className="flex h-screen bg-slate-50 overflow-hidden">
         <AdminSidebar unreadCount={3} adminName="Demo Admin" />
         <main className="flex-1 overflow-y-auto">{children}</main>
       </div>
@@ -39,7 +39,7 @@ export default async function AdminLayout({
     .eq("read", false);
 
   return (
-    <div className="flex h-screen bg-[#f0f2f8] overflow-hidden">
+    <div className="flex h-screen bg-slate-50 overflow-hidden">
       <AdminSidebar
         unreadCount={unreadCount ?? 0}
         adminName={profile.full_name}

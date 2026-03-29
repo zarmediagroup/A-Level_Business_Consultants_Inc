@@ -82,17 +82,17 @@ function ClientProfilePageContent({ client, documents, notes, auditLogs, adminId
       <div className="flex items-center gap-4 mb-8">
         <Link
           href="/portal/admin/clients"
-          className="w-9 h-9 rounded-xl bg-white border border-slate-200 hover:border-[#c9a84c]/40 flex items-center justify-center text-slate-500 hover:text-[#0b1d3a] transition-colors"
+          className="w-9 h-9 rounded-xl bg-white border border-slate-200 hover:border-blue-600/50 flex items-center justify-center text-slate-500 hover:text-slate-900 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
         </Link>
         <div className="flex-1">
-          <h1 className="text-2xl font-bold text-[#0b1d3a]">{client.full_name}</h1>
+          <h1 className="text-2xl font-bold text-slate-900">{client.full_name}</h1>
           <p className="text-slate-500 text-sm">Client Profile</p>
         </div>
         <Link
           href={`/portal/admin/clients?edit=${client.id}`}
-          className="flex items-center gap-2 bg-[#c9a84c] hover:bg-[#b8923c] text-[#0b1d3a] font-semibold text-sm px-5 py-2.5 rounded-xl transition-colors"
+          className="flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-slate-900 font-semibold text-sm px-5 py-2.5 rounded-xl transition-colors"
         >
           <Edit2 className="w-4 h-4" />
           Edit Client
@@ -104,9 +104,9 @@ function ClientProfilePageContent({ client, documents, notes, auditLogs, adminId
         <div className="space-y-6">
           {/* Profile */}
           <div className="bg-white rounded-2xl border border-slate-100 overflow-hidden">
-            <div className="bg-gradient-to-br from-[#0b1d3a] to-[#1a2f5e] px-6 py-8 text-center">
-              <div className="w-20 h-20 rounded-full bg-[#c9a84c]/20 border-2 border-[#c9a84c]/40 flex items-center justify-center mx-auto mb-4">
-                <span className="text-[#c9a84c] text-2xl font-bold">
+            <div className="bg-gradient-to-br from-slate-900 to-slate-800 px-6 py-8 text-center">
+              <div className="w-20 h-20 rounded-full bg-blue-700/15 border-2 border-blue-600/50 flex items-center justify-center mx-auto mb-4">
+                <span className="text-blue-800 text-2xl font-bold">
                   {getInitials(client.full_name)}
                 </span>
               </div>
@@ -138,12 +138,12 @@ function ClientProfilePageContent({ client, documents, notes, auditLogs, adminId
                 const Icon = item.icon;
                 return (
                   <div key={item.label} className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-[#0b1d3a]/5 flex items-center justify-center flex-shrink-0">
-                      <Icon className="w-4 h-4 text-[#0b1d3a]/40" />
+                    <div className="w-8 h-8 rounded-lg bg-slate-900/5 flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-4 h-4 text-slate-900/40" />
                     </div>
                     <div>
                       <p className="text-slate-400 text-xs">{item.label}</p>
-                      <p className="text-[#0b1d3a] text-sm font-medium">{item.value}</p>
+                      <p className="text-slate-900 text-sm font-medium">{item.value}</p>
                     </div>
                   </div>
                 );
@@ -153,7 +153,7 @@ function ClientProfilePageContent({ client, documents, notes, auditLogs, adminId
 
           {/* Stats */}
           <div className="bg-white rounded-2xl border border-slate-100 p-5">
-            <h3 className="font-bold text-[#0b1d3a] text-sm mb-4">Document Summary</h3>
+            <h3 className="font-bold text-slate-900 text-sm mb-4">Document Summary</h3>
             <div className="grid grid-cols-2 gap-3">
               {DOCUMENT_STATUS.map((s) => {
                 const count = (documents ?? []).filter((d) => d.status === s.value).length;
@@ -170,13 +170,13 @@ function ClientProfilePageContent({ client, documents, notes, auditLogs, adminId
           {/* Recent Activity */}
           {auditLogs && auditLogs.length > 0 && (
             <div className="bg-white rounded-2xl border border-slate-100 p-5">
-              <h3 className="font-bold text-[#0b1d3a] text-sm mb-4">Recent Activity</h3>
+              <h3 className="font-bold text-slate-900 text-sm mb-4">Recent Activity</h3>
               <div className="space-y-3">
                 {auditLogs.slice(0, 5).map((log) => (
                   <div key={log.id} className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#c9a84c] mt-1.5 flex-shrink-0" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-700 mt-1.5 flex-shrink-0" />
                     <div>
-                      <p className="text-[#0b1d3a] text-xs font-medium capitalize">
+                      <p className="text-slate-900 text-xs font-medium capitalize">
                         {log.action.replace(/_/g, " ")}
                       </p>
                       <p className="text-slate-400 text-xs">{formatDateTime(log.timestamp)}</p>
@@ -194,14 +194,14 @@ function ClientProfilePageContent({ client, documents, notes, auditLogs, adminId
           <div className="bg-white rounded-2xl border border-slate-100 overflow-hidden">
             <div className="flex items-center justify-between px-6 py-4 border-b border-slate-50">
               <div className="flex items-center gap-2">
-                <FileText className="w-5 h-5 text-[#c9a84c]" />
-                <h2 className="font-bold text-[#0b1d3a]">
+                <FileText className="w-5 h-5 text-blue-800" />
+                <h2 className="font-bold text-slate-900">
                   Documents ({(documents ?? []).length})
                 </h2>
               </div>
               <Link
                 href={`/portal/admin/documents?client=${client.id}`}
-                className="text-[#c9a84c] text-xs font-medium"
+                className="text-blue-800 text-xs font-medium"
               >
                 View all →
               </Link>
@@ -233,7 +233,7 @@ function ClientProfilePageContent({ client, documents, notes, auditLogs, adminId
                           <td className="px-5 py-3.5">
                             <div className="flex items-center gap-2">
                               <FileText className="w-4 h-4 text-slate-300 flex-shrink-0" />
-                              <span className="text-[#0b1d3a] text-sm font-medium truncate max-w-[160px]">
+                              <span className="text-slate-900 text-sm font-medium truncate max-w-[160px]">
                                 {doc.file_name}
                               </span>
                             </div>
@@ -255,7 +255,7 @@ function ClientProfilePageContent({ client, documents, notes, auditLogs, adminId
                           <td className="px-5 py-3.5">
                             <a
                               href={`/api/documents/${doc.id}/download`}
-                              className="text-[#c9a84c] hover:text-[#b8923c] text-xs font-medium transition-colors"
+                              className="text-blue-800 hover:text-blue-900 text-xs font-medium transition-colors"
                             >
                               Download
                             </a>

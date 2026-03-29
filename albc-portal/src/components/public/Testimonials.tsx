@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { getInitials } from "@/lib/utils";
+import { MarketingSectionHeader } from "./MarketingSectionHeader";
 
 const testimonials = [
   {
@@ -10,50 +11,51 @@ const testimonials = [
     company: "SM Retail Solutions",
     role: "Owner & Director",
     rating: 5,
-    text: "A-Level Business Consultants transformed the way I manage my finances. Before them, I was drowning in receipts and had no idea where my business stood. Now I have monthly management accounts, my tax is always on time, and I feel completely in control. Best decision I've made for my business.",
-    service: "Bookkeeping & Tax",
+    text: "A-Level transformed how I manage my finances. I now have monthly management accounts, tax filed on time, and real visibility — the best decision for my business.",
+    service: "Bookkeeping & tax",
   },
   {
     name: "David K.",
     company: "DK Construction Group",
     role: "Managing Director",
     rating: 5,
-    text: "We've been with A-Level for 6 years now. Their attention to detail is exceptional — they picked up a VAT error from a previous accountant that saved us over R80,000. I wouldn't trust anyone else with our accounts. The client portal makes submitting documents incredibly easy.",
-    service: "Tax & VAT Services",
+    text: "Six years with A-Level. Their attention to detail caught a VAT issue that saved us over R80,000. The client portal makes document submission straightforward.",
+    service: "Tax & VAT",
   },
   {
     name: "Priya N.",
     company: "Naidoo Professional Services",
     role: "Managing Partner",
     rating: 5,
-    text: "As a professional practice ourselves, we needed accountants who understood our specific needs. A-Level not only handles our bookkeeping and tax with precision but also advises us on business structuring. They're a true partner, not just a service provider.",
-    service: "Business Advisory",
+    text: "As a practice ourselves, we needed accountants who understood our context. A-Level delivers precision and structuring advice — not generic compliance-only work.",
+    service: "Business advisory",
   },
   {
     name: "James O.",
     company: "JO Tech Innovations",
     role: "CEO & Co-Founder",
     rating: 5,
-    text: "We came to A-Level when we needed to register our company and set up proper financial systems from scratch. They walked us through everything, got us SARS compliant, and set up payroll for our first 5 employees. Two years later, they're still our go-to for everything financial.",
-    service: "Business Registration & Payroll",
+    text: "They registered our company, set up financial systems, and payroll for our first hires. Two years on, they remain our financial partner.",
+    service: "Registration & payroll",
   },
   {
     name: "Fatima A.",
     company: "Al-Baraka Trading",
     role: "Operations Director",
     rating: 5,
-    text: "SARS came knocking with an audit and I was terrified. The team at A-Level handled everything — they communicated with SARS on our behalf, prepared all documentation, and resolved the audit without a single penalty. Their calmness and expertise under pressure is something I'll never forget.",
-    service: "Audit Support",
+    text: "When SARS audited us, A-Level handled SARS liaison and documentation. Resolved without penalties — calm and professional throughout.",
+    service: "Audit support",
   },
 ];
 
 function StarRating({ rating }: { rating: number }) {
   return (
-    <div className="flex items-center gap-0.5">
+    <div className="flex items-center gap-0.5" aria-label={`${rating} out of 5`}>
       {Array.from({ length: 5 }).map((_, i) => (
         <Star
           key={i}
-          className={`w-4 h-4 ${i < rating ? "fill-[#c9a84c] text-[#c9a84c]" : "text-slate-300"}`}
+          className={`h-3.5 w-3.5 ${i < rating ? "fill-slate-800 text-slate-800" : "fill-transparent text-slate-300"}`}
+          strokeWidth={1.25}
         />
       ))}
     </div>
@@ -69,104 +71,96 @@ export default function Testimonials() {
   const t = testimonials[current];
 
   return (
-    <section id="testimonials" className="py-28 bg-gradient-to-br from-[#060d1a] to-[#0b1d3a]">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 bg-[#c9a84c]/10 border border-[#c9a84c]/20 rounded-full px-4 py-2 mb-6">
-            <span className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase">
-              Client Testimonials
-            </span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            What Our Clients{" "}
-            <span className="gradient-text">Say About Us</span>
-          </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-            Don't take our word for it — hear from the business owners who trust us
-            with their most important financial decisions.
-          </p>
-        </div>
+    <section id="testimonials" className="border-t border-slate-200/80 bg-slate-50 py-20 md:py-24">
+      <div className="mx-auto max-w-6xl px-5 lg:px-8">
+        <MarketingSectionHeader
+          kicker="References"
+          title={
+            <>
+              What clients <span className="text-slate-600">report back</span>
+            </>
+          }
+          description="Names and companies are abbreviated where clients prefer privacy. Ratings reflect voluntary feedback, not paid endorsements."
+        />
 
-        <div className="max-w-4xl mx-auto">
-          {/* Main testimonial */}
-          <div className="glass-card rounded-2xl p-10 md:p-14 relative">
-            {/* Quote icon */}
-            <div className="absolute top-8 right-8 opacity-10">
-              <Quote className="w-16 h-16 text-[#c9a84c]" />
-            </div>
-
-            <div className="flex items-start gap-6 mb-8">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#c9a84c]/30 to-[#c9a84c]/10 border-2 border-[#c9a84c]/30 flex items-center justify-center flex-shrink-0">
-                <span className="text-[#c9a84c] font-bold text-lg">
-                  {getInitials(t.name)}
-                </span>
+        <div className="mx-auto max-w-3xl">
+          <figure className="border border-slate-200 bg-white p-8 md:p-10">
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center border border-slate-200 bg-slate-50 text-xs font-semibold text-slate-800">
+                {getInitials(t.name)}
               </div>
-              <div>
-                <div className="flex items-center gap-3 mb-1">
-                  <h4 className="text-white font-bold">{t.name}</h4>
-                  <span className="text-[#c9a84c] text-xs font-medium bg-[#c9a84c]/10 px-2.5 py-1 rounded-full">
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                  <figcaption className="text-[15px] font-semibold text-slate-900">{t.name}</figcaption>
+                  <span className="text-[10px] font-medium uppercase tracking-[0.12em] text-slate-500">
                     {t.service}
                   </span>
                 </div>
-                <p className="text-slate-400 text-sm">
-                  {t.role} — {t.company}
+                <p className="mt-1 text-sm text-slate-500">
+                  {t.role}, {t.company}
                 </p>
-                <div className="mt-2">
+                <div className="mt-3">
                   <StarRating rating={t.rating} />
                 </div>
+                <blockquote className="mt-6 text-[15px] leading-[1.65] text-slate-700">
+                  &ldquo;{t.text}&rdquo;
+                </blockquote>
               </div>
             </div>
 
-            <p className="text-slate-200 text-lg leading-relaxed italic">
-              &ldquo;{t.text}&rdquo;
-            </p>
-
-            {/* Navigation */}
-            <div className="flex items-center justify-between mt-10 pt-8 border-t border-white/10">
-              <div className="flex items-center gap-3">
+            <div className="mt-8 flex items-center justify-between border-t border-slate-100 pt-6">
+              <div className="flex items-center gap-1.5">
                 {testimonials.map((_, i) => (
                   <button
                     key={i}
+                    type="button"
                     onClick={() => setCurrent(i)}
-                    className={`transition-all duration-200 rounded-full ${
-                      i === current
-                        ? "w-8 h-2 bg-[#c9a84c]"
-                        : "w-2 h-2 bg-white/20 hover:bg-white/40"
+                    className={`h-1.5 transition-all ${
+                      i === current ? "w-6 bg-slate-900" : "w-1.5 bg-slate-300 hover:bg-slate-400"
                     }`}
+                    aria-label={`Testimonial ${i + 1} of ${testimonials.length}`}
+                    aria-current={i === current}
                   />
                 ))}
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex gap-1">
                 <button
+                  type="button"
                   onClick={prev}
-                  className="w-10 h-10 rounded-full border border-white/15 hover:border-[#c9a84c]/50 flex items-center justify-center text-slate-400 hover:text-[#c9a84c] transition-colors"
+                  className="flex h-9 w-9 items-center justify-center border border-slate-200 bg-white text-slate-700 transition-colors hover:border-slate-300 hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900"
+                  aria-label="Previous testimonial"
                 >
-                  <ChevronLeft className="w-5 h-5" />
+                  <ChevronLeft className="h-4 w-4" strokeWidth={1.75} />
                 </button>
                 <button
+                  type="button"
                   onClick={next}
-                  className="w-10 h-10 rounded-full border border-white/15 hover:border-[#c9a84c]/50 flex items-center justify-center text-slate-400 hover:text-[#c9a84c] transition-colors"
+                  className="flex h-9 w-9 items-center justify-center border border-slate-200 bg-white text-slate-700 transition-colors hover:border-slate-300 hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900"
+                  aria-label="Next testimonial"
                 >
-                  <ChevronRight className="w-5 h-5" />
+                  <ChevronRight className="h-4 w-4" strokeWidth={1.75} />
                 </button>
               </div>
             </div>
-          </div>
+          </figure>
 
-          {/* Summary stats */}
-          <div className="mt-12 grid grid-cols-3 gap-6 text-center">
+          <dl className="mt-8 grid grid-cols-3 gap-px border border-slate-200 bg-slate-200 text-center">
             {[
-              { value: "200+", label: "Happy Clients" },
-              { value: "4.9/5", label: "Average Rating" },
-              { value: "98%", label: "Would Recommend" },
+              { value: "200+", label: "Relationships" },
+              { value: "4.9", label: "Avg. rating" },
+              { value: "98%", label: "Recommend" },
             ].map((stat) => (
-              <div key={stat.label} className="glass-card rounded-xl py-6 px-4">
-                <div className="text-3xl font-bold gradient-text mb-1">{stat.value}</div>
-                <div className="text-slate-400 text-sm">{stat.label}</div>
+              <div key={stat.label} className="bg-white px-3 py-5">
+                <dt className="sr-only">{stat.label}</dt>
+                <dd className="font-display text-xl font-normal tabular-nums text-slate-900 md:text-2xl">
+                  {stat.value}
+                </dd>
+                <div className="mt-1 text-[10px] font-medium uppercase tracking-[0.12em] text-slate-500">
+                  {stat.label}
+                </div>
               </div>
             ))}
-          </div>
+          </dl>
         </div>
       </div>
     </section>

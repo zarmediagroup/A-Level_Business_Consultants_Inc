@@ -58,7 +58,7 @@ export default function NotificationsPanel({ initialNotifications, userId }: Not
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-[#0b1d3a]">Notification Centre</h1>
+          <h1 className="text-2xl font-bold text-slate-900">Notification Centre</h1>
           <p className="text-slate-500 text-sm mt-1">
             {unread.length} unread · {notifications.length} total
           </p>
@@ -67,10 +67,10 @@ export default function NotificationsPanel({ initialNotifications, userId }: Not
           <button
             onClick={markAllRead}
             disabled={marking}
-            className="flex items-center gap-2 text-sm text-[#0b1d3a] hover:text-[#c9a84c] font-semibold transition-colors disabled:opacity-50"
+            className="flex items-center gap-2 text-sm text-slate-900 hover:text-blue-800 font-semibold transition-colors disabled:opacity-50"
           >
             {marking ? (
-              <div className="w-4 h-4 border-2 border-slate-300 border-t-[#0b1d3a] rounded-full animate-spin" />
+              <div className="w-4 h-4 border-2 border-slate-300 border-t-slate-900 rounded-full animate-spin" />
             ) : (
               <CheckCheck className="w-4 h-4" />
             )}
@@ -82,7 +82,7 @@ export default function NotificationsPanel({ initialNotifications, userId }: Not
       {notifications.length === 0 ? (
         <div className="bg-white rounded-2xl border border-slate-100 p-16 text-center">
           <Bell className="w-12 h-12 text-slate-200 mx-auto mb-4" />
-          <h3 className="text-[#0b1d3a] font-semibold mb-2">All caught up!</h3>
+          <h3 className="text-slate-900 font-semibold mb-2">All caught up!</h3>
           <p className="text-slate-400 text-sm">No notifications yet. Client activity will appear here.</p>
         </div>
       ) : (
@@ -135,7 +135,7 @@ function NotificationCard({
   return (
     <div
       className={`bg-white rounded-2xl border transition-all duration-200 ${
-        !n.read ? "border-[#c9a84c]/20 shadow-sm" : "border-slate-100"
+        !n.read ? "border-blue-700/25 shadow-sm" : "border-slate-100"
       }`}
     >
       <div className="flex items-start gap-4 p-5">
@@ -145,14 +145,14 @@ function NotificationCard({
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className={`text-sm font-semibold ${!n.read ? "text-[#0b1d3a]" : "text-slate-600"}`}>
+              <p className={`text-sm font-semibold ${!n.read ? "text-slate-900" : "text-slate-600"}`}>
                 {n.title}
               </p>
               <p className="text-slate-500 text-sm mt-0.5 leading-relaxed">{n.message}</p>
             </div>
             {!n.read && (
               <div className="flex items-center gap-2 flex-shrink-0">
-                <div className="w-2 h-2 rounded-full bg-[#c9a84c]" />
+                <div className="w-2 h-2 rounded-full bg-blue-700" />
               </div>
             )}
           </div>
@@ -162,7 +162,7 @@ function NotificationCard({
               {n.related_document_id && (
                 <Link
                   href={`/portal/admin/documents`}
-                  className="text-[#c9a84c] hover:text-[#b8923c] text-xs font-medium transition-colors"
+                  className="text-blue-800 hover:text-blue-900 text-xs font-medium transition-colors"
                 >
                   View Document
                 </Link>
@@ -170,7 +170,7 @@ function NotificationCard({
               {n.related_client_id && (
                 <Link
                   href={`/portal/admin/clients/${n.related_client_id}`}
-                  className="text-[#0b1d3a] hover:text-[#1a2f5e] text-xs font-medium transition-colors"
+                  className="text-slate-900 hover:text-blue-800 text-xs font-medium transition-colors"
                 >
                   View Client
                 </Link>
@@ -178,7 +178,7 @@ function NotificationCard({
               {!n.read && (
                 <button
                   onClick={() => onMarkRead(n.id)}
-                  className="text-slate-400 hover:text-[#0b1d3a] text-xs flex items-center gap-1 transition-colors"
+                  className="text-slate-400 hover:text-slate-900 text-xs flex items-center gap-1 transition-colors"
                 >
                   <Check className="w-3.5 h-3.5" />
                   Mark read

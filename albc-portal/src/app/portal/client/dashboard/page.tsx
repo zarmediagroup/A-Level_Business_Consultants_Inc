@@ -42,18 +42,26 @@ function ClientDashboardUI({ profile, docs, notifications, isDemo }: {
     <div className="p-6 lg:p-8 max-w-5xl mx-auto">
       {/* Demo banner */}
       {isDemo && (
-        <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-6 flex items-center gap-3">
-          <span className="text-amber-600 text-sm font-semibold">⚡ Demo Mode</span>
-          <span className="text-amber-700 text-sm">Connect Supabase in <code className="bg-amber-100 px-1.5 py-0.5 rounded font-mono text-xs">.env.local</code> to enable full functionality.</span>
+        <div className="mb-6 flex gap-3 border border-slate-200 bg-white p-4">
+          <span className="shrink-0 pt-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-500">
+            Demo
+          </span>
+          <p className="text-sm leading-snug text-slate-600">
+            Sample dashboard. Configure Supabase in{" "}
+            <code className="border border-slate-200 bg-slate-50 px-1.5 py-0.5 font-mono text-xs text-slate-800">
+              .env.local
+            </code>{" "}
+            for your live data.
+          </p>
         </div>
       )}
 
       {/* Welcome header */}
       <div className="mb-8">
-        <div className="bg-gradient-to-r from-[#0b1d3a] to-[#1a2f5e] rounded-2xl p-7 text-white relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-40 h-40 bg-[#c9a84c]/5 rounded-full blur-3xl" />
+        <div className="relative overflow-hidden border border-slate-800 bg-gradient-to-r from-slate-900 to-slate-800 p-7 text-white">
+          <div className="absolute top-0 right-0 w-40 h-40 bg-blue-700/5 rounded-full blur-3xl" />
           <div className="relative">
-            <p className="text-[#c9a84c] text-sm font-semibold mb-2">Welcome back,</p>
+            <p className="text-blue-200/90 text-sm font-medium mb-2">Welcome back,</p>
             <h1 className="text-2xl font-bold">{profile.full_name}</h1>
             {profile.company && <p className="text-slate-400 text-sm mt-1">{profile.company}</p>}
             <p className="text-slate-400 text-xs mt-3">
@@ -65,23 +73,26 @@ function ClientDashboardUI({ profile, docs, notifications, isDemo }: {
 
       {/* Unread notifications */}
       {notifications.length > 0 && (
-        <div className="bg-[#c9a84c]/10 border border-[#c9a84c]/20 rounded-2xl p-4 mb-6 flex items-center gap-4">
-          <Bell className="w-5 h-5 text-[#c9a84c] flex-shrink-0" />
+        <div className="mb-6 flex items-center gap-4 border border-slate-200 bg-slate-50 p-4">
+          <Bell className="h-5 w-5 shrink-0 text-slate-600" strokeWidth={1.75} />
           <div className="flex-1">
-            <p className="text-[#0b1d3a] text-sm font-semibold">
+            <p className="text-slate-900 text-sm font-semibold">
               {notifications.length} new notification{notifications.length > 1 ? "s" : ""}
             </p>
             <p className="text-slate-600 text-xs mt-0.5">{notifications[0]?.message}</p>
           </div>
-          <Link href="/portal/client/notifications" className="text-[#c9a84c] text-xs font-semibold hover:text-[#b8923c] transition-colors whitespace-nowrap">
-            View all →
+          <Link
+            href="/portal/client/notifications"
+            className="whitespace-nowrap text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-600 hover:text-slate-900"
+          >
+            View all
           </Link>
         </div>
       )}
 
       {/* Requires action */}
       {requiresActionDocs.length > 0 && (
-        <div className="bg-red-50 border border-red-200 rounded-2xl p-4 mb-6 flex items-center gap-4">
+        <div className="mb-6 flex items-center gap-4 border border-red-200 bg-red-50/80 p-4">
           <AlertTriangle className="w-5 h-5 text-red-600 flex-shrink-0" />
           <div className="flex-1">
             <p className="text-red-800 text-sm font-semibold">Action Required</p>
@@ -93,17 +104,17 @@ function ClientDashboardUI({ profile, docs, notifications, isDemo }: {
 
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <div className="bg-white rounded-2xl border border-slate-100 p-5">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0b1d3a] to-[#1a2f5e] flex items-center justify-center mb-4">
+        <div className="border border-slate-200 bg-white p-5">
+          <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-sm bg-gradient-to-br from-slate-900 to-slate-800">
             <FileText className="w-5 h-5 text-white" />
           </div>
-          <div className="text-2xl font-bold text-[#0b1d3a]">{docs.length}</div>
+          <div className="text-2xl font-bold text-slate-900">{docs.length}</div>
           <div className="text-slate-500 text-sm">Total Documents</div>
         </div>
         {statusCounts.slice(0, 3).map((s) => (
-          <div key={s.value} className="bg-white rounded-2xl border border-slate-100 p-5">
+          <div key={s.value} className="border border-slate-200 bg-white p-5">
             <div className={`inline-flex text-xs font-semibold px-2.5 py-1.5 rounded-full ${s.color} mb-3`}>{s.label}</div>
-            <div className="text-2xl font-bold text-[#0b1d3a]">{s.count}</div>
+            <div className="text-2xl font-bold text-slate-900">{s.count}</div>
             <div className="text-slate-500 text-sm">Documents</div>
           </div>
         ))}
@@ -111,20 +122,28 @@ function ClientDashboardUI({ profile, docs, notifications, isDemo }: {
 
       <div className="grid lg:grid-cols-3 gap-6">
         {/* Recent documents */}
-        <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-100 overflow-hidden">
-          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-50">
+        <div className="overflow-hidden border border-slate-200 bg-white lg:col-span-2">
+          <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4">
             <div className="flex items-center gap-2">
-              <FileText className="w-5 h-5 text-[#c9a84c]" />
-              <h2 className="font-bold text-[#0b1d3a]">Recent Documents</h2>
+              <FileText className="h-5 w-5 text-slate-700" strokeWidth={1.75} />
+              <h2 className="font-bold text-slate-900">Recent Documents</h2>
             </div>
-            <Link href="/portal/client/documents" className="text-[#c9a84c] text-xs font-medium">View all →</Link>
+            <Link
+              href="/portal/client/documents"
+              className="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-500 hover:text-slate-800"
+            >
+              View all
+            </Link>
           </div>
           <div className="divide-y divide-slate-50">
             {docs.length === 0 ? (
               <div className="px-6 py-12 text-center">
                 <Upload className="w-10 h-10 text-slate-200 mx-auto mb-3" />
                 <p className="text-slate-400 text-sm mb-4">No documents uploaded yet</p>
-                <Link href="/portal/client/upload" className="inline-flex items-center gap-2 bg-[#0b1d3a] text-white text-sm font-semibold px-5 py-2.5 rounded-xl">
+                <Link
+                  href="/portal/client/upload"
+                  className="inline-flex items-center gap-2 border border-slate-900 bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white"
+                >
                   <Upload className="w-4 h-4" />Upload your first document
                 </Link>
               </div>
@@ -132,11 +151,11 @@ function ClientDashboardUI({ profile, docs, notifications, isDemo }: {
               const statusInfo = getStatusInfo(doc.status);
               return (
                 <div key={doc.id} className="px-6 py-4 flex items-center gap-4">
-                  <div className="w-9 h-9 rounded-xl bg-[#0b1d3a]/5 flex items-center justify-center flex-shrink-0">
-                    <FileText className="w-4 h-4 text-[#0b1d3a]/30" />
+                  <div className="w-9 h-9 rounded-xl bg-slate-900/5 flex items-center justify-center flex-shrink-0">
+                    <FileText className="w-4 h-4 text-slate-900/30" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-[#0b1d3a] text-sm font-semibold truncate">{doc.file_name}</p>
+                    <p className="text-slate-900 text-sm font-semibold truncate">{doc.file_name}</p>
                     <p className="text-slate-400 text-xs mt-0.5">{getCategoryLabel(doc.category)} · {formatDate(doc.uploaded_at)}</p>
                   </div>
                   <span className={`text-xs font-semibold px-2.5 py-1.5 rounded-full flex-shrink-0 ${statusInfo.color}`}>
@@ -150,11 +169,14 @@ function ClientDashboardUI({ profile, docs, notifications, isDemo }: {
 
         {/* Quick actions */}
         <div className="space-y-4">
-          <h2 className="font-bold text-[#0b1d3a]">Quick Actions</h2>
-          <Link href="/portal/client/upload" className="flex items-center justify-between bg-[#0b1d3a] hover:bg-[#1a2f5e] text-white rounded-2xl p-5 transition-colors group">
+          <h2 className="font-bold text-slate-900">Quick Actions</h2>
+          <Link
+            href="/portal/client/upload"
+            className="group flex items-center justify-between border border-slate-900 bg-slate-900 p-5 text-white transition-colors hover:bg-slate-800"
+          >
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[#c9a84c]/20 flex items-center justify-center">
-                <Upload className="w-5 h-5 text-[#c9a84c]" />
+              <div className="flex h-10 w-10 items-center justify-center border border-white/20 bg-white/10">
+                <Upload className="h-5 w-5 text-white" strokeWidth={1.75} />
               </div>
               <div>
                 <p className="font-semibold text-sm">Upload Document</p>
@@ -164,10 +186,13 @@ function ClientDashboardUI({ profile, docs, notifications, isDemo }: {
             <ArrowRight className="w-5 h-5 text-slate-500 group-hover:translate-x-1 transition-transform" />
           </Link>
 
-          <Link href="/portal/client/documents" className="flex items-center justify-between bg-white hover:shadow-md border border-slate-100 text-[#0b1d3a] rounded-2xl p-5 transition-all group">
+          <Link
+            href="/portal/client/documents"
+            className="group flex items-center justify-between border border-slate-200 bg-white p-5 text-slate-900 transition-colors hover:border-slate-300"
+          >
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[#0b1d3a]/5 flex items-center justify-center">
-                <FileText className="w-5 h-5 text-[#0b1d3a]/50" />
+              <div className="w-10 h-10 rounded-xl bg-slate-900/5 flex items-center justify-center">
+                <FileText className="w-5 h-5 text-slate-900/50" />
               </div>
               <div>
                 <p className="font-semibold text-sm">My Documents</p>
@@ -177,20 +202,23 @@ function ClientDashboardUI({ profile, docs, notifications, isDemo }: {
             <ArrowRight className="w-5 h-5 text-slate-400 group-hover:translate-x-1 transition-transform" />
           </Link>
 
-          <div className="bg-white rounded-2xl border border-slate-100 p-5">
-            <h3 className="font-semibold text-[#0b1d3a] text-sm mb-4">Account Details</h3>
+          <div className="border border-slate-200 bg-white p-5">
+            <h3 className="font-semibold text-slate-900 text-sm mb-4">Account Details</h3>
             <div className="space-y-3 text-sm">
               <div>
                 <p className="text-slate-400 text-xs">Service Type</p>
-                <p className="text-[#0b1d3a] font-medium">{profile.service_category ?? "Contact us"}</p>
+                <p className="text-slate-900 font-medium">{profile.service_category ?? "Contact us"}</p>
               </div>
               <div>
                 <p className="text-slate-400 text-xs">Account Manager</p>
-                <p className="text-[#0b1d3a] font-medium">A-Level Business Consultants</p>
+                <p className="text-slate-900 font-medium">A-Level Business Consultants</p>
               </div>
               <div>
                 <p className="text-slate-400 text-xs">Support Email</p>
-                <a href="mailto:info@albc.co.za" className="text-[#c9a84c] font-medium hover:text-[#b8923c] transition-colors">
+                <a
+                  href="mailto:info@albc.co.za"
+                  className="font-medium text-slate-900 underline underline-offset-2 hover:no-underline"
+                >
                   info@albc.co.za
                 </a>
               </div>

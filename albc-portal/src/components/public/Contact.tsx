@@ -2,34 +2,35 @@
 
 import { useState } from "react";
 import { Mail, Phone, MapPin, Clock, Send, CheckCircle } from "lucide-react";
+import { MarketingSectionHeader } from "./MarketingSectionHeader";
 
 const contactInfo = [
   {
     icon: Mail,
-    label: "Email Us",
+    label: "Email",
     value: "info@albc.co.za",
-    sub: "We respond within 1 business day",
+    sub: "Response within one business day",
     href: "mailto:info@albc.co.za",
   },
   {
     icon: Phone,
-    label: "Call Us",
+    label: "Phone",
     value: "+27 (0)__ ___ ____",
-    sub: "Monday–Friday, 8:00–17:00",
+    sub: "Monday–Friday, 08:00–17:00",
     href: "tel:+27000000000",
   },
   {
     icon: MapPin,
-    label: "Our Office",
+    label: "Coverage",
     value: "South Africa",
-    sub: "Serving clients nationally and remotely",
+    sub: "National and remote engagements",
     href: null,
   },
   {
     icon: Clock,
-    label: "Office Hours",
+    label: "Hours",
     value: "Mon–Fri: 08:00–17:00",
-    sub: "Sat: 09:00–13:00 by appointment",
+    sub: "Saturday by appointment",
     href: null,
   },
 ];
@@ -85,51 +86,44 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-28 bg-[#f8f9fc]">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 bg-[#0b1d3a]/5 border border-[#0b1d3a]/10 rounded-full px-4 py-2 mb-6">
-            <span className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase">
-              Get In Touch
-            </span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-[#0b1d3a] mb-6">
-            Let&apos;s Start a{" "}
-            <span className="text-[#c9a84c]">Conversation</span>
-          </h2>
-          <p className="text-slate-500 text-lg max-w-2xl mx-auto">
-            Whether you&apos;re looking to switch accountants, register a new business, or
-            need urgent tax advice — we&apos;re here to help. Contact us today for a
-            free, no-obligation consultation.
-          </p>
-        </div>
+    <section id="contact" className="border-t border-slate-200/80 bg-white py-20 md:py-24">
+      <div className="mx-auto max-w-6xl px-5 lg:px-8">
+        <MarketingSectionHeader
+          kicker="Contact"
+          title={
+            <>
+              Tell us what you need <span className="text-slate-600">in a few lines</span>
+            </>
+          }
+          description="New mandate, changing accountants, or a deadline — we confirm receipt the same day where possible and reply with who will handle your file."
+        />
 
-        <div className="grid lg:grid-cols-5 gap-12">
-          {/* Left: Contact Info */}
-          <div className="lg:col-span-2 space-y-6">
-            <div className="bg-gradient-to-br from-[#0b1d3a] to-[#1a2f5e] rounded-2xl p-8 text-white">
-              <h3 className="text-xl font-bold mb-2">Contact Information</h3>
-              <div className="gold-divider mb-6" />
-
+        <div className="grid gap-12 lg:grid-cols-5 lg:gap-14">
+          <div className="space-y-6 lg:col-span-2">
+            <div className="border border-slate-900 bg-slate-900 p-8 text-white">
+              <h3 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-400">
+                Direct lines
+              </h3>
               <div className="space-y-6">
                 {contactInfo.map((info) => {
                   const Icon = info.icon;
                   const content = (
                     <div className="flex items-start gap-4 group">
-                      <div className="w-10 h-10 rounded-xl bg-[#c9a84c]/15 flex items-center justify-center flex-shrink-0 group-hover:bg-[#c9a84c]/25 transition-colors">
-                        <Icon className="w-5 h-5 text-[#c9a84c]" />
+                      <div className="w-10 h-10 rounded-md bg-white/10 flex items-center justify-center flex-shrink-0 border border-white/10">
+                        <Icon className="w-4 h-4 text-slate-200" />
                       </div>
                       <div>
-                        <p className="text-slate-400 text-xs mb-0.5">{info.label}</p>
-                        <p className="text-white font-semibold text-sm">{info.value}</p>
+                        <p className="mb-0.5 text-[10px] font-medium uppercase tracking-[0.14em] text-slate-500">
+                          {info.label}
+                        </p>
+                        <p className="text-white font-medium text-sm">{info.value}</p>
                         <p className="text-slate-500 text-xs mt-0.5">{info.sub}</p>
                       </div>
                     </div>
                   );
 
                   return info.href ? (
-                    <a key={info.label} href={info.href} className="block hover:opacity-80 transition-opacity">
+                    <a key={info.label} href={info.href} className="block hover:opacity-90 transition-opacity">
                       {content}
                     </a>
                   ) : (
@@ -138,114 +132,104 @@ export default function Contact() {
                 })}
               </div>
 
-              <div className="gold-divider mt-8 mb-6" />
-
-              <div>
-                <p className="text-white font-semibold text-sm mb-2">Existing Client?</p>
-                <p className="text-slate-400 text-xs mb-4">
-                  Log in to your secure client portal to upload documents and manage your account.
-                </p>
+              <div className="mt-8 border-t border-white/15 pt-8">
+                <p className="text-sm font-medium text-white">Existing client</p>
+                <p className="mb-4 mt-1 text-xs text-slate-400">Documents and secure messages</p>
                 <a
                   href="/portal/login"
-                  className="inline-flex items-center gap-2 bg-[#c9a84c] hover:bg-[#b8923c] text-[#0b1d3a] font-bold text-sm px-5 py-2.5 rounded-lg transition-colors w-full justify-center"
+                  className="inline-flex h-10 w-full items-center justify-center border border-white/40 text-[11px] font-semibold uppercase tracking-[0.1em] text-white transition-colors hover:bg-white hover:text-slate-900"
                 >
-                  Access Client Portal
+                  Open portal
                 </a>
               </div>
             </div>
           </div>
 
-          {/* Right: Form */}
           <div className="lg:col-span-3">
-            <div className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
+            <div className="border border-slate-200 bg-slate-50/80 p-8 md:p-10">
               {success ? (
-                <div className="flex flex-col items-center justify-center py-12 text-center">
-                  <div className="w-16 h-16 rounded-full bg-green-50 border-2 border-green-200 flex items-center justify-center mb-6">
-                    <CheckCircle className="w-8 h-8 text-green-500" />
+                <div className="flex flex-col items-center justify-center py-10 text-center">
+                  <div className="w-14 h-14 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center mb-5">
+                    <CheckCircle className="w-7 h-7 text-emerald-600" />
                   </div>
-                  <h3 className="text-2xl font-bold text-[#0b1d3a] mb-3">Message Received!</h3>
-                  <p className="text-slate-500 max-w-sm leading-relaxed">
-                    Thank you for reaching out. A member of our team will contact you within 1 business day.
+                  <h3 className="text-xl font-semibold text-slate-900 mb-2">Message received</h3>
+                  <p className="text-slate-600 text-sm max-w-md leading-relaxed">
+                    Thank you. A member of our team will contact you within one business day.
                   </p>
                   <button
+                    type="button"
                     onClick={() => setSuccess(false)}
-                    className="mt-8 text-[#c9a84c] hover:text-[#b8923c] font-semibold text-sm transition-colors"
+                    className="mt-8 text-sm font-medium text-slate-900 underline underline-offset-4 hover:no-underline"
                   >
                     Send another message
                   </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
-                  <h3 className="text-xl font-bold text-[#0b1d3a] mb-6">
-                    Send us a message
+                  <h3 className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">
+                    Enquiry form
                   </h3>
 
                   <div className="grid sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-sm font-medium text-[#0b1d3a] mb-2">
-                        Full Name <span className="text-red-500">*</span>
+                      <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                        Full name <span className="text-red-600">*</span>
                       </label>
                       <input
                         type="text"
                         required
                         value={form.name}
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
-                        placeholder="John Smith"
-                        className="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#c9a84c] focus:ring-2 focus:ring-[#c9a84c]/10 transition-colors"
+                        placeholder="Jane Doe"
+                        className="w-full border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 transition-colors focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900/15"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-[#0b1d3a] mb-2">
-                        Email Address <span className="text-red-500">*</span>
+                      <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                        Email <span className="text-red-600">*</span>
                       </label>
                       <input
                         type="email"
                         required
                         value={form.email}
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
-                        placeholder="john@company.co.za"
-                        className="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#c9a84c] focus:ring-2 focus:ring-[#c9a84c]/10 transition-colors"
+                        placeholder="jane@company.co.za"
+                        className="w-full border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 transition-colors focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900/15"
                       />
                     </div>
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-sm font-medium text-[#0b1d3a] mb-2">
-                        Phone Number
-                      </label>
+                      <label className="block text-sm font-medium text-slate-700 mb-1.5">Phone</label>
                       <input
                         type="tel"
                         value={form.phone}
                         onChange={(e) => setForm({ ...form, phone: e.target.value })}
                         placeholder="+27 82 000 0000"
-                        className="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#c9a84c] focus:ring-2 focus:ring-[#c9a84c]/10 transition-colors"
+                        className="w-full border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 transition-colors focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900/15"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-[#0b1d3a] mb-2">
-                        Company / Business Name
-                      </label>
+                      <label className="block text-sm font-medium text-slate-700 mb-1.5">Company</label>
                       <input
                         type="text"
                         value={form.company}
                         onChange={(e) => setForm({ ...form, company: e.target.value })}
-                        placeholder="Your Business Pty Ltd"
-                        className="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#c9a84c] focus:ring-2 focus:ring-[#c9a84c]/10 transition-colors"
+                        placeholder="Your Business (Pty) Ltd"
+                        className="w-full border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 transition-colors focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900/15"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-[#0b1d3a] mb-2">
-                      Service of Interest
-                    </label>
+                    <label className="block text-sm font-medium text-slate-700 mb-1.5">Service interest</label>
                     <select
                       value={form.service}
                       onChange={(e) => setForm({ ...form, service: e.target.value })}
-                      className="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-[#c9a84c] focus:ring-2 focus:ring-[#c9a84c]/10 transition-colors bg-white"
+                      className="w-full border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 transition-colors focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900/15"
                     >
-                      <option value="">Select a service...</option>
+                      <option value="">Select…</option>
                       {services.map((s) => (
                         <option key={s} value={s}>{s}</option>
                       ))}
@@ -253,21 +237,21 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-[#0b1d3a] mb-2">
-                      Message <span className="text-red-500">*</span>
+                    <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                      Message <span className="text-red-600">*</span>
                     </label>
                     <textarea
                       required
                       rows={5}
                       value={form.message}
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
-                      placeholder="Tell us about your business and what you need help with..."
-                      className="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#c9a84c] focus:ring-2 focus:ring-[#c9a84c]/10 transition-colors resize-none"
+                      placeholder="Brief context and what you need help with…"
+                      className="w-full resize-none border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 transition-colors focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900/15"
                     />
                   </div>
 
                   {error && (
-                    <div className="bg-red-50 border border-red-200 rounded-xl p-3 text-red-700 text-sm">
+                    <div className="bg-red-50 border border-red-200 rounded-md p-3 text-red-800 text-sm">
                       {error}
                     </div>
                   )}
@@ -275,23 +259,23 @@ export default function Contact() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="flex items-center justify-center gap-2 w-full bg-[#0b1d3a] hover:bg-[#1a2f5e] disabled:opacity-60 text-white font-semibold px-8 py-4 rounded-xl transition-colors text-sm"
+                    className="flex h-11 w-full items-center justify-center gap-2 border border-slate-900 bg-slate-900 text-[11px] font-semibold uppercase tracking-[0.1em] text-white transition-colors hover:bg-slate-800 disabled:opacity-50"
                   >
                     {loading ? (
                       <>
                         <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        Sending...
+                        Sending…
                       </>
                     ) : (
                       <>
                         <Send className="w-4 h-4" />
-                        Send Message
+                        Submit enquiry
                       </>
                     )}
                   </button>
 
-                  <p className="text-slate-400 text-xs text-center">
-                    Your information is confidential and will never be shared with third parties.
+                  <p className="text-slate-500 text-xs text-center">
+                    Your information is treated as confidential and is not shared with third parties.
                   </p>
                 </form>
               )}

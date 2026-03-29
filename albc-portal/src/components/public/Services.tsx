@@ -10,167 +10,129 @@ import {
   Briefcase,
   TrendingUp,
   Shield,
-  ArrowRight,
+  ArrowUpRight,
 } from "lucide-react";
+import { MarketingSectionHeader } from "./MarketingSectionHeader";
 
 const services = [
   {
     icon: BookOpen,
     title: "Bookkeeping",
     description:
-      "Accurate, up-to-date bookkeeping that keeps your finances organised and gives you a real-time view of your business performance. We manage your general ledger, reconciliations, and management accounts.",
-    features: ["Monthly management accounts", "Bank reconciliations", "Creditors & debtors"],
+      "Timely reconciliations, management accounts, and a ledger you can rely on for decisions.",
+    features: ["Management accounts", "Bank reconciliations", "Creditors & debtors"],
     highlight: false,
   },
   {
     icon: FileText,
-    title: "Tax Returns",
+    title: "Tax returns",
     description:
-      "Comprehensive tax compliance and planning for individuals and companies. We ensure you're always compliant with SARS while maximising every legitimate tax-saving opportunity.",
-    features: ["Income tax returns", "Provisional tax", "Tax planning & structuring"],
+      "Corporate and personal filings, provisional tax, and planning aligned to SARS requirements.",
+    features: ["Income tax", "Provisional tax", "Structuring advice"],
     highlight: true,
   },
   {
     icon: Users,
-    title: "Payroll Services",
+    title: "Payroll",
     description:
-      "End-to-end payroll processing, EMP201 submissions, and IRP5 certificates. We handle the complexity of payroll so your employees are paid correctly and on time, every time.",
-    features: ["Monthly payroll processing", "EMP201 submissions", "IRP5 / IT3(a) certificates"],
+      "Pay runs, EMP201, and year-end certificates — executed on schedule with audit-friendly records.",
+    features: ["Monthly payroll", "EMP201", "IRP5 / IT3(a)"],
     highlight: false,
   },
   {
     icon: Building2,
-    title: "Business Registration",
+    title: "Business registration",
     description:
-      "Full company registration, amendment, and secretarial services through CIPC. We handle all the paperwork so your business is legally constituted and compliant from day one.",
-    features: ["Company registration", "Share register maintenance", "CIPC amendments"],
+      "CIPC registrations, amendments, and secretarial records maintained to statute.",
+    features: ["New companies", "Share register", "CIPC changes"],
     highlight: false,
   },
   {
     icon: BarChart3,
-    title: "Financial Statements",
+    title: "Financial statements",
     description:
-      "Professionally prepared annual financial statements compiled in accordance with IFRS for SMEs. Suitable for bank submissions, investor presentations, and statutory requirements.",
-    features: ["Annual financial statements", "Compilation reports", "IFRS for SMEs compliance"],
+      "Annual financial statements prepared for IFRS for SMEs — suitable for funders and filing.",
+    features: ["AFS compilation", "Compilation reports", "IFRS for SMEs"],
     highlight: false,
   },
   {
     icon: Receipt,
-    title: "VAT Returns",
+    title: "VAT",
     description:
-      "Accurate VAT registration, return preparation, and submission to SARS. We manage your VAT affairs to keep you compliant and avoid costly penalties.",
-    features: ["VAT registration", "Monthly/bi-monthly returns", "VAT audits & disputes"],
+      "Registration, returns, and dispute support — structured to reduce exposure and delay.",
+    features: ["VAT registration", "Returns", "SARS correspondence"],
     highlight: false,
   },
   {
     icon: Briefcase,
-    title: "Company Secretarial",
+    title: "Company secretarial",
     description:
-      "Comprehensive company secretarial services to keep your entity compliant with the Companies Act. Resolutions, register maintenance, and statutory filings.",
-    features: ["Director changes", "Share transfers", "Annual returns (CIPC)"],
+      "Resolutions, statutory registers, and annual returns filed on time.",
+    features: ["Director changes", "Share movements", "CIPC annual returns"],
     highlight: false,
   },
   {
     icon: TrendingUp,
-    title: "Business Consulting",
+    title: "Advisory",
     description:
-      "Strategic financial advisory for business owners looking to improve profitability, manage cash flow, secure funding, or plan for growth. Real advice, not just numbers.",
-    features: ["Cash flow management", "Business plans & forecasts", "Growth strategy"],
+      "Cash flow, forecasts, and growth planning grounded in your actual numbers.",
+    features: ["Cash flow", "Forecasts", "Funding packs"],
     highlight: false,
   },
   {
     icon: Shield,
-    title: "Audit Support",
+    title: "Audit & verification support",
     description:
-      "Comprehensive support during SARS audits and verifications. We liaise with SARS on your behalf, prepare all required documentation, and protect your best interests throughout.",
-    features: ["SARS audit representation", "Document preparation", "Dispute resolution"],
+      "Document packs, SARS liaison, and measured responses during reviews or audits.",
+    features: ["Audit prep", "SARS liaison", "Disputes"],
     highlight: false,
   },
 ];
 
 export default function Services() {
   return (
-    <section id="services" className="py-28 bg-[#f8f9fc]">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 bg-[#0b1d3a]/5 border border-[#0b1d3a]/10 rounded-full px-4 py-2 mb-6">
-            <span className="text-[#c9a84c] text-xs font-semibold tracking-widest uppercase">
-              Our Services
-            </span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-[#0b1d3a] mb-6">
-            Comprehensive Financial Services{" "}
-            <span className="text-[#c9a84c]">Under One Roof</span>
-          </h2>
-          <p className="text-slate-500 text-lg max-w-2xl mx-auto leading-relaxed">
-            From day-to-day bookkeeping to complex tax structuring, we provide the full
-            spectrum of accounting and business advisory services your organisation needs
-            to thrive.
-          </p>
-        </div>
+    <section id="services" className="border-t border-slate-200/80 bg-slate-50 py-20 md:py-24">
+      <div className="mx-auto max-w-6xl px-5 lg:px-8">
+        <MarketingSectionHeader
+          kicker="Services"
+          title={
+            <>
+              End-to-end finance support <span className="text-slate-600">in one relationship</span>
+            </>
+          }
+          description="Engagements are scoped in writing. You know who owns the file, what we deliver each month, and how we charge — before work begins."
+        />
 
-        {/* Services grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid gap-px bg-slate-200 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => {
             const Icon = service.icon;
             return (
-              <div
+              <article
                 key={service.title}
-                className={`group relative rounded-2xl p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
+                className={`group relative flex flex-col bg-white p-7 transition-colors md:p-8 ${
                   service.highlight
-                    ? "bg-gradient-to-br from-[#0b1d3a] to-[#1a2f5e] text-white shadow-lg shadow-[#0b1d3a]/20"
-                    : "bg-white border border-slate-100 hover:border-[#c9a84c]/20 hover:shadow-[#c9a84c]/5"
+                    ? "ring-1 ring-inset ring-slate-900 sm:ring-2"
+                    : "hover:bg-slate-50/90"
                 }`}
               >
-                {service.highlight && (
-                  <div className="absolute top-4 right-4 bg-[#c9a84c] text-[#0b1d3a] text-xs font-bold px-2.5 py-1 rounded-full">
-                    Most Popular
-                  </div>
-                )}
+                {service.highlight ? (
+                  <span className="absolute right-6 top-6 text-[9px] font-semibold uppercase tracking-[0.14em] text-slate-500">
+                    Frequently engaged
+                  </span>
+                ) : null}
 
-                <div
-                  className={`w-13 h-13 rounded-xl flex items-center justify-center mb-5 ${
-                    service.highlight
-                      ? "bg-[#c9a84c]/20"
-                      : "bg-gradient-to-br from-[#0b1d3a] to-[#1a2f5e]"
-                  }`}
-                >
-                  <Icon
-                    className={`w-6 h-6 ${
-                      service.highlight ? "text-[#c9a84c]" : "text-[#c9a84c]"
-                    }`}
-                  />
+                <div className="mb-4 flex h-9 w-9 items-center justify-center border border-slate-200">
+                  <Icon className="h-4 w-4 text-slate-700" strokeWidth={1.5} />
                 </div>
 
-                <h3
-                  className={`text-lg font-bold mb-3 ${
-                    service.highlight ? "text-white" : "text-[#0b1d3a]"
-                  }`}
-                >
-                  {service.title}
-                </h3>
-                <p
-                  className={`text-sm leading-relaxed mb-5 ${
-                    service.highlight ? "text-slate-300" : "text-slate-500"
-                  }`}
-                >
-                  {service.description}
-                </p>
+                <h3 className="pr-16 text-[15px] font-semibold text-slate-900">{service.title}</h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{service.description}</p>
 
-                <ul className="space-y-2 mb-6">
+                <ul className="mt-5 space-y-1.5 text-xs text-slate-600">
                   {service.features.map((feature) => (
-                    <li key={feature} className="flex items-center gap-2 text-xs">
-                      <div
-                        className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${
-                          service.highlight ? "bg-[#c9a84c]" : "bg-[#c9a84c]"
-                        }`}
-                      />
-                      <span
-                        className={service.highlight ? "text-slate-300" : "text-slate-500"}
-                      >
-                        {feature}
-                      </span>
+                    <li key={feature} className="flex gap-2">
+                      <span className="mt-1.5 h-px w-2 shrink-0 bg-slate-300" aria-hidden />
+                      {feature}
                     </li>
                   ))}
                 </ul>
@@ -181,38 +143,33 @@ export default function Services() {
                     e.preventDefault();
                     document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
                   }}
-                  className={`inline-flex items-center gap-1.5 text-xs font-semibold transition-colors group-hover:gap-2.5 ${
-                    service.highlight
-                      ? "text-[#c9a84c] hover:text-[#e0ce96]"
-                      : "text-[#0b1d3a] hover:text-[#c9a84c]"
-                  }`}
+                  className="mt-6 inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-slate-900 underline-offset-4 hover:underline"
                 >
-                  Enquire about this service
-                  <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                  Discuss this
+                  <ArrowUpRight className="h-3 w-3" strokeWidth={2} />
                 </a>
-              </div>
+              </article>
             );
           })}
         </div>
 
-        {/* Bottom CTA */}
-        <div className="mt-16 text-center">
-          <div className="inline-flex flex-col sm:flex-row items-center gap-4 bg-gradient-to-r from-[#0b1d3a] to-[#1a2f5e] rounded-2xl px-10 py-8">
-            <div className="text-left">
-              <p className="text-white font-semibold text-lg">Not sure which service you need?</p>
-              <p className="text-slate-400 text-sm">Book a free 30-minute consultation and we'll guide you.</p>
-            </div>
-            <a
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="flex-shrink-0 bg-[#c9a84c] hover:bg-[#b8923c] text-[#0b1d3a] font-bold px-7 py-3 rounded-xl transition-colors text-sm whitespace-nowrap"
-            >
-              Book Free Consultation
-            </a>
+        <div className="mt-12 flex flex-col justify-between gap-6 border border-slate-200 bg-white px-8 py-8 md:flex-row md:items-center md:px-10">
+          <div>
+            <p className="text-[15px] font-medium text-slate-900">Not sure where to start?</p>
+            <p className="mt-1 text-sm text-slate-600">
+              A short call is usually enough to map services, timelines, and fees.
+            </p>
           </div>
+          <a
+            href="#contact"
+            onClick={(e) => {
+              e.preventDefault();
+              document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="inline-flex h-11 shrink-0 items-center justify-center border border-slate-900 bg-slate-900 px-6 text-[11px] font-semibold uppercase tracking-[0.1em] text-white transition-colors hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900"
+          >
+            Book an intro call
+          </a>
         </div>
       </div>
     </section>

@@ -81,7 +81,7 @@ export default function ProfilePanel({ profile }: ProfilePanelProps) {
   return (
     <div className="p-6 lg:p-8 max-w-2xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-[#0b1d3a]">My Profile</h1>
+        <h1 className="text-2xl font-bold text-slate-900">My Profile</h1>
         <p className="text-slate-500 text-sm mt-1">Manage your account details and security settings</p>
       </div>
 
@@ -94,9 +94,9 @@ export default function ProfilePanel({ profile }: ProfilePanelProps) {
       {/* Profile card */}
       <div className="bg-white rounded-2xl border border-slate-100 overflow-hidden mb-6">
         {/* Avatar header */}
-        <div className="bg-gradient-to-br from-[#0b1d3a] to-[#1a2f5e] px-6 py-8 flex items-center gap-5">
-          <div className="w-16 h-16 rounded-full bg-[#c9a84c]/20 border-2 border-[#c9a84c]/40 flex items-center justify-center">
-            <span className="text-[#c9a84c] text-xl font-bold">{getInitials(profile.full_name)}</span>
+        <div className="bg-gradient-to-br from-slate-900 to-slate-800 px-6 py-8 flex items-center gap-5">
+          <div className="w-16 h-16 rounded-full bg-blue-700/15 border-2 border-blue-600/50 flex items-center justify-center">
+            <span className="text-blue-800 text-xl font-bold">{getInitials(profile.full_name)}</span>
           </div>
           <div>
             <p className="text-white font-bold text-lg">{profile.full_name}</p>
@@ -109,10 +109,10 @@ export default function ProfilePanel({ profile }: ProfilePanelProps) {
 
         {/* Profile form */}
         <form onSubmit={handleSaveProfile} className="p-6 space-y-5">
-          <h3 className="font-semibold text-[#0b1d3a] text-sm">Personal Information</h3>
+          <h3 className="font-semibold text-slate-900 text-sm">Personal Information</h3>
 
           <div>
-            <label className="block text-sm font-medium text-[#0b1d3a] mb-2">Full Name</label>
+            <label className="block text-sm font-medium text-slate-900 mb-2">Full Name</label>
             <div className="relative">
               <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input
@@ -120,13 +120,13 @@ export default function ProfilePanel({ profile }: ProfilePanelProps) {
                 required
                 value={form.full_name}
                 onChange={(e) => setForm({ ...form, full_name: e.target.value })}
-                className="w-full pl-10 pr-4 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#c9a84c]/50 focus:ring-2 focus:ring-[#c9a84c]/10 text-slate-800"
+                className="w-full pl-10 pr-4 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/10 text-slate-800"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-[#0b1d3a] mb-2">Email Address</label>
+            <label className="block text-sm font-medium text-slate-900 mb-2">Email Address</label>
             <div className="relative">
               <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input
@@ -141,7 +141,7 @@ export default function ProfilePanel({ profile }: ProfilePanelProps) {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-[#0b1d3a] mb-2">Phone Number</label>
+              <label className="block text-sm font-medium text-slate-900 mb-2">Phone Number</label>
               <div className="relative">
                 <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                 <input
@@ -149,12 +149,12 @@ export default function ProfilePanel({ profile }: ProfilePanelProps) {
                   value={form.phone}
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
                   placeholder="+27 82 000 0000"
-                  className="w-full pl-10 pr-4 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#c9a84c]/50 focus:ring-2 focus:ring-[#c9a84c]/10 text-slate-800"
+                  className="w-full pl-10 pr-4 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/10 text-slate-800"
                 />
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-[#0b1d3a] mb-2">Company</label>
+              <label className="block text-sm font-medium text-slate-900 mb-2">Company</label>
               <div className="relative">
                 <Building2 className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                 <input
@@ -162,7 +162,7 @@ export default function ProfilePanel({ profile }: ProfilePanelProps) {
                   value={form.company}
                   onChange={(e) => setForm({ ...form, company: e.target.value })}
                   placeholder="Business name"
-                  className="w-full pl-10 pr-4 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#c9a84c]/50 focus:ring-2 focus:ring-[#c9a84c]/10 text-slate-800"
+                  className="w-full pl-10 pr-4 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/10 text-slate-800"
                 />
               </div>
             </div>
@@ -172,7 +172,7 @@ export default function ProfilePanel({ profile }: ProfilePanelProps) {
             <button
               type="submit"
               disabled={savingProfile}
-              className="flex items-center gap-2 bg-[#0b1d3a] hover:bg-[#1a2f5e] disabled:opacity-60 text-white font-semibold text-sm px-6 py-3 rounded-xl transition-colors"
+              className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 disabled:opacity-60 text-white font-semibold text-sm px-6 py-3 rounded-xl transition-colors"
             >
               {savingProfile ? (
                 <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -194,13 +194,13 @@ export default function ProfilePanel({ profile }: ProfilePanelProps) {
 
       {/* Password change */}
       <div className="bg-white rounded-2xl border border-slate-100 p-6">
-        <h3 className="font-semibold text-[#0b1d3a] mb-5 flex items-center gap-2">
-          <Lock className="w-4 h-4 text-[#c9a84c]" />
+        <h3 className="font-semibold text-slate-900 mb-5 flex items-center gap-2">
+          <Lock className="w-4 h-4 text-blue-800" />
           Change Password
         </h3>
         <form onSubmit={handleChangePassword} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-[#0b1d3a] mb-2">New Password</label>
+            <label className="block text-sm font-medium text-slate-900 mb-2">New Password</label>
             <div className="relative">
               <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input
@@ -210,7 +210,7 @@ export default function ProfilePanel({ profile }: ProfilePanelProps) {
                 onChange={(e) => setPasswords({ ...passwords, new: e.target.value })}
                 placeholder="Min. 8 characters"
                 minLength={8}
-                className="w-full pl-10 pr-12 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#c9a84c]/50 focus:ring-2 focus:ring-[#c9a84c]/10 text-slate-800"
+                className="w-full pl-10 pr-12 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/10 text-slate-800"
               />
               <button
                 type="button"
@@ -222,7 +222,7 @@ export default function ProfilePanel({ profile }: ProfilePanelProps) {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-[#0b1d3a] mb-2">Confirm New Password</label>
+            <label className="block text-sm font-medium text-slate-900 mb-2">Confirm New Password</label>
             <div className="relative">
               <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input
@@ -231,7 +231,7 @@ export default function ProfilePanel({ profile }: ProfilePanelProps) {
                 value={passwords.confirm}
                 onChange={(e) => setPasswords({ ...passwords, confirm: e.target.value })}
                 placeholder="Repeat new password"
-                className="w-full pl-10 pr-4 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#c9a84c]/50 focus:ring-2 focus:ring-[#c9a84c]/10 text-slate-800"
+                className="w-full pl-10 pr-4 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/10 text-slate-800"
               />
             </div>
           </div>
@@ -239,10 +239,10 @@ export default function ProfilePanel({ profile }: ProfilePanelProps) {
             <button
               type="submit"
               disabled={savingPassword}
-              className="flex items-center gap-2 bg-[#c9a84c] hover:bg-[#b8923c] disabled:opacity-60 text-[#0b1d3a] font-semibold text-sm px-6 py-3 rounded-xl transition-colors"
+              className="flex items-center gap-2 bg-blue-700 hover:bg-blue-800 disabled:opacity-60 text-slate-900 font-semibold text-sm px-6 py-3 rounded-xl transition-colors"
             >
               {savingPassword ? (
-                <div className="w-4 h-4 border-2 border-[#0b1d3a]/30 border-t-[#0b1d3a] rounded-full animate-spin" />
+                <div className="w-4 h-4 border-2 border-slate-900/30 border-t-slate-900 rounded-full animate-spin" />
               ) : passwordSuccess ? (
                 <>
                   <CheckCircle className="w-4 h-4" />

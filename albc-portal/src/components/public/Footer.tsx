@@ -18,69 +18,64 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#060d1a] text-slate-400">
-      {/* Top CTA bar */}
-      <div className="border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
+    <footer className="border-t border-slate-800 bg-slate-950 text-slate-400">
+      <div className="border-b border-slate-800/80">
+        <div className="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-10 md:flex-row md:items-center md:justify-between lg:px-8">
           <div>
-            <h3 className="text-white font-bold text-xl mb-1">
-              Ready to take your finances to the next level?
+            <h3 className="mb-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+              Engagements
             </h3>
-            <p className="text-slate-500 text-sm">
-              Get in touch today for a free, no-obligation consultation.
-            </p>
+            <p className="text-base font-normal text-white">Introductory calls are confidential and without obligation.</p>
           </div>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-2">
             <a
               href="#contact"
               onClick={(e) => {
                 e.preventDefault();
                 document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="bg-[#c9a84c] hover:bg-[#b8923c] text-[#0b1d3a] font-bold text-sm px-6 py-3 rounded-xl transition-colors"
+              className="inline-flex h-10 items-center justify-center border border-white bg-white px-5 text-[11px] font-semibold uppercase tracking-[0.1em] text-slate-900 transition-colors hover:bg-slate-100"
             >
-              Contact Us
+              Contact
             </a>
             <Link
               href="/portal/login"
-              className="border border-white/15 hover:border-[#c9a84c]/40 text-white hover:text-[#c9a84c] font-semibold text-sm px-6 py-3 rounded-xl transition-colors flex items-center gap-2"
+              className="inline-flex h-10 items-center justify-center gap-2 border border-slate-600 px-5 text-[11px] font-semibold uppercase tracking-[0.08em] text-white transition-colors hover:border-slate-500"
             >
-              <Shield className="w-4 h-4" />
-              Client Login
+              <Shield className="h-3.5 w-3.5" strokeWidth={1.75} />
+              Client login
             </Link>
           </div>
         </div>
       </div>
 
-      {/* Main footer */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+      <div className="mx-auto max-w-6xl px-5 py-14 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Brand */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#c9a84c] to-[#a07830] flex items-center justify-center">
-                <span className="text-white font-bold text-sm">AL</span>
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-9 h-9 rounded-md bg-white flex items-center justify-center">
+                <span className="text-slate-900 font-semibold text-xs">AL</span>
               </div>
               <div>
-                <div className="text-white font-bold text-sm leading-tight">A-Level Business</div>
-                <div className="text-[#c9a84c] text-xs tracking-widest uppercase">Consultants Inc</div>
+                <div className="text-white font-semibold text-sm leading-tight">A-Level Business</div>
+                <div className="text-slate-500 text-[10px] tracking-[0.15em] uppercase">Consultants Inc</div>
               </div>
             </div>
             <p className="text-slate-500 text-sm leading-relaxed mb-6">
-              Professional accounting, tax, payroll, and business advisory services for
-              South African businesses of all sizes.
+              Accounting, tax, payroll, and advisory for South African businesses — delivered
+              with professional standards and clear communication.
             </p>
-            <div className="space-y-3">
+            <div className="space-y-2.5">
               <a
                 href="mailto:info@albc.co.za"
-                className="flex items-center gap-2 text-slate-500 hover:text-[#c9a84c] text-sm transition-colors"
+                className="flex items-center gap-2 text-slate-500 hover:text-white text-sm transition-colors"
               >
                 <Mail className="w-4 h-4" />
                 info@albc.co.za
               </a>
               <a
                 href="tel:+27000000000"
-                className="flex items-center gap-2 text-slate-500 hover:text-[#c9a84c] text-sm transition-colors"
+                className="flex items-center gap-2 text-slate-500 hover:text-white text-sm transition-colors"
               >
                 <Phone className="w-4 h-4" />
                 +27 (0)__ ___ ____
@@ -88,10 +83,9 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Services */}
           <div>
-            <h4 className="text-white font-semibold text-sm mb-6 tracking-wide">Services</h4>
-            <ul className="space-y-3">
+            <h4 className="text-white font-medium text-sm mb-5">Services</h4>
+            <ul className="space-y-2.5">
               {serviceLinks.map((service) => (
                 <li key={service}>
                   <a
@@ -100,7 +94,7 @@ export default function Footer() {
                       e.preventDefault();
                       document.querySelector("#services")?.scrollIntoView({ behavior: "smooth" });
                     }}
-                    className="text-slate-500 hover:text-[#c9a84c] text-sm transition-colors"
+                    className="text-slate-500 hover:text-white text-sm transition-colors"
                   >
                     {service}
                   </a>
@@ -109,15 +103,14 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Company */}
           <div>
-            <h4 className="text-white font-semibold text-sm mb-6 tracking-wide">Company</h4>
-            <ul className="space-y-3">
+            <h4 className="text-white font-medium text-sm mb-5">Company</h4>
+            <ul className="space-y-2.5">
               {[
-                { label: "About Us", href: "#about" },
-                { label: "Our Team", href: "#team" },
-                { label: "Client Testimonials", href: "#testimonials" },
-                { label: "Contact Us", href: "#contact" },
+                { label: "About", href: "#about" },
+                { label: "Team", href: "#team" },
+                { label: "Testimonials", href: "#testimonials" },
+                { label: "Contact", href: "#contact" },
               ].map((link) => (
                 <li key={link.label}>
                   <a
@@ -126,7 +119,7 @@ export default function Footer() {
                       e.preventDefault();
                       document.querySelector(link.href)?.scrollIntoView({ behavior: "smooth" });
                     }}
-                    className="text-slate-500 hover:text-[#c9a84c] text-sm transition-colors"
+                    className="text-slate-500 hover:text-white text-sm transition-colors"
                   >
                     {link.label}
                   </a>
@@ -135,33 +128,28 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Client Portal */}
           <div>
-            <h4 className="text-white font-semibold text-sm mb-6 tracking-wide">Client Portal</h4>
-            <div className="bg-[#0b1d3a]/60 border border-white/5 rounded-xl p-5 mb-4">
-              <div className="flex items-center gap-2 mb-3">
-                <Shield className="w-4 h-4 text-[#c9a84c]" />
-                <span className="text-white text-sm font-semibold">Secure Document Portal</span>
+            <h4 className="text-white font-medium text-sm mb-5">Client portal</h4>
+            <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-5 mb-4">
+              <div className="flex items-center gap-2 mb-2">
+                <Shield className="w-4 h-4 text-slate-300" />
+                <span className="text-white text-sm font-medium">Secure document exchange</span>
               </div>
               <p className="text-slate-500 text-xs leading-relaxed mb-4">
-                Upload documents, track their status, and communicate with our team — all
-                in your private, secure portal.
+                Upload files, track status, and correspond with our team in one place.
               </p>
               <Link
                 href="/portal/login"
-                className="flex items-center gap-2 bg-[#c9a84c]/10 hover:bg-[#c9a84c]/20 border border-[#c9a84c]/20 text-[#c9a84c] font-semibold text-xs px-4 py-2.5 rounded-lg transition-colors"
+                className="inline-flex items-center gap-2 border border-slate-600 hover:border-slate-500 text-white text-xs font-medium px-4 py-2 rounded-md transition-colors"
               >
                 <ExternalLink className="w-3.5 h-3.5" />
-                Access Client Portal
+                Open portal
               </Link>
             </div>
             <ul className="space-y-2">
-              {["Login to Portal", "Reset Password", "Upload Documents"].map((item) => (
+              {["Login", "Reset password", "Upload documents"].map((item) => (
                 <li key={item}>
-                  <Link
-                    href="/portal/login"
-                    className="text-slate-500 hover:text-[#c9a84c] text-sm transition-colors"
-                  >
+                  <Link href="/portal/login" className="text-slate-500 hover:text-white text-sm transition-colors">
                     {item}
                   </Link>
                 </li>
@@ -171,26 +159,23 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-slate-600 text-xs">
-            © {year} A-Level Business Consultants Inc. All rights reserved.
-          </p>
-          <div className="flex items-center gap-6">
-            <span className="text-slate-600 text-xs">SARS Registered Tax Practitioner</span>
-            <span className="text-slate-700">·</span>
-            <span className="text-slate-600 text-xs">CIPC Registered</span>
-            <span className="text-slate-700">·</span>
-            <span className="text-slate-600 text-xs">Fully Insured</span>
+      <div className="border-t border-slate-800">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-5 text-xs text-slate-600 sm:flex-row lg:px-8">
+          <p>© {year} A-Level Business Consultants Inc. All rights reserved.</p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <span>SARS registered tax practitioner</span>
+            <span className="hidden sm:inline text-slate-700">·</span>
+            <span>CIPC registered</span>
+            <span className="hidden sm:inline text-slate-700">·</span>
+            <span>Fully insured</span>
           </div>
-          <p className="text-slate-700 text-xs">
+          <p>
             Website by{" "}
             <a
               href="https://zarmediagroup.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#c9a84c]/60 hover:text-[#c9a84c] transition-colors"
+              className="text-slate-500 hover:text-white transition-colors"
             >
               ZarMediaGroup
             </a>

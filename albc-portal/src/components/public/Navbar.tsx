@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, ChevronRight } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -13,12 +13,15 @@ const navLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
+const linkFocus =
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900 rounded-sm";
+
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleScroll = () => setScrolled(window.scrollY > 12);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -29,80 +32,125 @@ export default function Navbar() {
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
+  const linkClass = scrolled
+    ? "text-slate-600 hover:text-slate-900"
+    : "text-slate-300 hover:text-white";
+
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 transition-[background,border-color,box-shadow] duration-200",
         scrolled
-          ? "bg-[#0b1d3a]/98 backdrop-blur-md shadow-lg shadow-black/20"
-          : "bg-transparent"
+          ? "border-b border-slate-200/90 bg-white/90 backdrop-blur-md shadow-[0_1px_0_0_rgba(15,23,42,0.04)]"
+          : "border-b border-transparent bg-transparent"
       )}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#c9a84c] to-[#a07830] flex items-center justify-center shadow-lg">
-              <span className="text-white font-bold text-sm tracking-tight">AL</span>
-            </div>
-            <div className="hidden sm:block">
-              <div className="text-white font-bold text-base leading-tight">
-                A-Level Business
-              </div>
-              <div className="text-[#c9a84c] text-xs tracking-widest uppercase font-medium">
-                Consultants Inc
-              </div>
-            </div>
-          </Link>
-
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <button
-                key={link.href}
-                onClick={() => handleNav(link.href)}
-                className="text-slate-300 hover:text-[#c9a84c] text-sm font-medium transition-colors duration-200 relative group"
-              >
-                {link.label}
-                <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-[#c9a84c] transition-all duration-300 group-hover:w-full" />
-              </button>
-            ))}
-          </div>
-
-          {/* CTA */}
-          <div className="hidden md:flex items-center gap-4">
-            <Link
-              href="/portal/login"
-              className="flex items-center gap-2 bg-[#c9a84c] hover:bg-[#b8923c] text-[#0b1d3a] font-semibold text-sm px-5 py-2.5 rounded-lg transition-all duration-200 shadow-lg hover:shadow-[#c9a84c]/25 hover:-translate-y-0.5"
-            >
-              Client Login
-              <ChevronRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
+      <div className="mx-auto flex h-[3.75rem] max-w-6xl items-center justify-between px-5 lg:px-8">
+        <Link
+          href="/"
+          className={cn(
+            "flex items-center gap-2.5 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
+            scrolled ? "focus-visible:outline-slate-900" : "focus-visible:outline-white"
+          )}
+        >
+          <div
+            className={cn(
+              "flex h-8 w-8 items-center justify-center border transition-colors",
+              scrolled
+                ? "border-slate-900 bg-slate-900 text-white"
+                : "border-white/25 bg-white/5 text-white"
+            )}
           >
-            {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
-        </div>
-      </div>
+            <span className="text-[11px] font-semibold tracking-tight">AL</span>
+          </div>
+          <div className="hidden min-[380px]:block">
+            <div
+              className={cn(
+                "text-[13px] font-semibold leading-none tracking-tight",
+                scrolled ? "text-slate-900" : "text-white"
+              )}
+            >
+              A-Level Business
+            </div>
+            <div
+              className={cn(
+                "mt-0.5 text-[9px] font-medium uppercase tracking-[0.18em]",
+                scrolled ? "text-slate-500" : "text-slate-400"
+              )}
+            >
+              Consultants
+            </div>
+          </div>
+        </Link>
 
-      {/* Mobile Menu */}
-      <div
-        className={cn(
-          "md:hidden transition-all duration-300 overflow-hidden",
-          menuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-        )}
-      >
-        <div className="bg-[#0b1d3a]/98 backdrop-blur-md border-t border-white/10 px-6 py-4 space-y-1">
+        <div className="hidden items-center gap-1 md:flex">
           {navLinks.map((link) => (
             <button
               key={link.href}
+              type="button"
               onClick={() => handleNav(link.href)}
-              className="block w-full text-left text-slate-300 hover:text-[#c9a84c] py-3 text-sm font-medium border-b border-white/5 last:border-0 transition-colors"
+              className={cn(
+                "px-3 py-2 text-[11px] font-medium uppercase tracking-[0.14em] transition-colors",
+                linkClass,
+                linkFocus
+              )}
+            >
+              {link.label}
+            </button>
+          ))}
+        </div>
+
+        <div className="hidden md:block">
+          <Link
+            href="/portal/login"
+            className={cn(
+              "inline-flex items-center justify-center border px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] transition-colors",
+              scrolled
+                ? "border-slate-900 bg-slate-900 text-white hover:bg-slate-800"
+                : "border-white/40 bg-transparent text-white hover:bg-white/10",
+              "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900"
+            )}
+          >
+            Client login
+          </Link>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setMenuOpen(!menuOpen)}
+          className={cn(
+            "rounded-sm p-2 md:hidden",
+            linkFocus,
+            scrolled
+              ? "text-slate-800 hover:bg-slate-100"
+              : "text-white hover:bg-white/10"
+          )}
+          aria-expanded={menuOpen}
+          aria-label="Menu"
+        >
+          {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
+      </div>
+
+      <div
+        className={cn(
+          "overflow-hidden border-t transition-[max-height,opacity] duration-200 md:hidden",
+          scrolled ? "border-slate-200 bg-white" : "border-white/10 bg-slate-950",
+          menuOpen ? "max-h-[22rem] opacity-100" : "max-h-0 border-transparent opacity-0"
+        )}
+      >
+        <div className="space-y-0 px-5 py-3">
+          {navLinks.map((link) => (
+            <button
+              key={link.href}
+              type="button"
+              onClick={() => handleNav(link.href)}
+              className={cn(
+                "block w-full border-b py-3 text-left text-[12px] font-medium uppercase tracking-[0.12em] last:border-0",
+                scrolled
+                  ? "border-slate-100 text-slate-700 hover:text-slate-900"
+                  : "border-white/10 text-slate-200 hover:text-white"
+              )}
             >
               {link.label}
             </button>
@@ -110,11 +158,15 @@ export default function Navbar() {
           <div className="pt-3">
             <Link
               href="/portal/login"
-              className="flex items-center justify-center gap-2 bg-[#c9a84c] text-[#0b1d3a] font-semibold text-sm px-5 py-3 rounded-lg w-full"
+              className={cn(
+                "flex w-full items-center justify-center py-3 text-[11px] font-semibold uppercase tracking-[0.12em]",
+                scrolled
+                  ? "bg-slate-900 text-white"
+                  : "bg-white text-slate-900"
+              )}
               onClick={() => setMenuOpen(false)}
             >
-              Client Login
-              <ChevronRight className="w-4 h-4" />
+              Client login
             </Link>
           </div>
         </div>

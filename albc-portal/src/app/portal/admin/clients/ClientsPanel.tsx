@@ -85,14 +85,14 @@ export default function ClientsPanel({ initialClients, adminId }: ClientsPanelPr
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-[#0b1d3a]">Client Management</h1>
+          <h1 className="text-2xl font-bold text-slate-900">Client Management</h1>
           <p className="text-slate-500 text-sm mt-1">
             {clients.length} total · {clients.filter((c) => c.is_active).length} active
           </p>
         </div>
         <button
           onClick={() => { setEditingClient(null); setShowModal(true); }}
-          className="flex items-center gap-2 bg-[#0b1d3a] hover:bg-[#1a2f5e] text-white font-semibold text-sm px-5 py-2.5 rounded-xl transition-colors"
+          className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm px-5 py-2.5 rounded-xl transition-colors"
         >
           <Plus className="w-4 h-4" />
           Add Client
@@ -108,7 +108,7 @@ export default function ClientsPanel({ initialClients, adminId }: ClientsPanelPr
             placeholder="Search clients by name, email, or company..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-[#c9a84c]/50 focus:ring-2 focus:ring-[#c9a84c]/10 text-slate-800 placeholder-slate-400"
+            className="w-full pl-10 pr-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/10 text-slate-800 placeholder-slate-400"
           />
         </div>
         <div className="flex items-center gap-3">
@@ -116,7 +116,7 @@ export default function ClientsPanel({ initialClients, adminId }: ClientsPanelPr
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value as "all" | "active" | "inactive")}
-            className="border border-slate-200 rounded-xl px-3 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-[#c9a84c]/50 bg-white"
+            className="border border-slate-200 rounded-xl px-3 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-blue-600 bg-white"
           >
             <option value="all">All Status</option>
             <option value="active">Active</option>
@@ -125,7 +125,7 @@ export default function ClientsPanel({ initialClients, adminId }: ClientsPanelPr
           <select
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
-            className="border border-slate-200 rounded-xl px-3 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-[#c9a84c]/50 bg-white"
+            className="border border-slate-200 rounded-xl px-3 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-blue-600 bg-white"
           >
             <option value="all">All Services</option>
             {SERVICE_CATEGORIES.map((s) => (
@@ -181,13 +181,13 @@ export default function ClientsPanel({ initialClients, adminId }: ClientsPanelPr
                   <tr key={client.id} className="table-row-hover transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0b1d3a] to-[#1a2f5e] flex items-center justify-center flex-shrink-0">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center flex-shrink-0">
                           <span className="text-white text-xs font-bold">
                             {getInitials(client.full_name)}
                           </span>
                         </div>
                         <div>
-                          <p className="text-[#0b1d3a] font-semibold text-sm">{client.full_name}</p>
+                          <p className="text-slate-900 font-semibold text-sm">{client.full_name}</p>
                           {client.company && (
                             <p className="text-slate-400 text-xs">{client.company}</p>
                           )}
@@ -209,7 +209,7 @@ export default function ClientsPanel({ initialClients, adminId }: ClientsPanelPr
                       </div>
                     </td>
                     <td className="px-4 py-4 hidden lg:table-cell">
-                      <span className="inline-flex items-center bg-[#0b1d3a]/5 text-[#0b1d3a] text-xs font-medium px-3 py-1.5 rounded-full">
+                      <span className="inline-flex items-center bg-slate-900/5 text-slate-900 text-xs font-medium px-3 py-1.5 rounded-full">
                         {client.service_category ?? "—"}
                       </span>
                     </td>
@@ -244,14 +244,14 @@ export default function ClientsPanel({ initialClients, adminId }: ClientsPanelPr
                       <div className="flex items-center justify-end gap-2">
                         <Link
                           href={`/portal/admin/clients/${client.id}`}
-                          className="w-8 h-8 rounded-lg bg-slate-50 hover:bg-[#0b1d3a] hover:text-white text-slate-500 flex items-center justify-center transition-colors"
+                          className="w-8 h-8 rounded-lg bg-slate-50 hover:bg-slate-900 hover:text-white text-slate-500 flex items-center justify-center transition-colors"
                           title="View Profile"
                         >
                           <Eye className="w-3.5 h-3.5" />
                         </Link>
                         <button
                           onClick={() => { setEditingClient(client); setShowModal(true); }}
-                          className="w-8 h-8 rounded-lg bg-slate-50 hover:bg-[#c9a84c] hover:text-[#0b1d3a] text-slate-500 flex items-center justify-center transition-colors"
+                          className="w-8 h-8 rounded-lg bg-slate-50 hover:bg-blue-700 hover:text-slate-900 text-slate-500 flex items-center justify-center transition-colors"
                           title="Edit Client"
                         >
                           <Edit2 className="w-3.5 h-3.5" />
